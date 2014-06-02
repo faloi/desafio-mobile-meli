@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.cuantocuesta.android.MainActivity">
+
+    <com.cuantocuesta.android.NiceText
+        android:id="@+id/title_cuanto_cuesta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F98470"
+        android:gravity="center"
+        android:padding="30dp"
+        android:text="¿Cuánto cuesta?"
+        android:textColor="#ffffff"
+        android:textSize="75sp">
+
+    </com.cuantocuesta.android.NiceText>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/triangle"
+            android:layout_centerHorizontal="true"
+            android:rotation="180" >
+
+        </View>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="iPhone 5, Playstation 3, etc"
+            android:singleLine="true"
+            android:background="#ffffff"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:padding="15dp"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+</LinearLayout>
