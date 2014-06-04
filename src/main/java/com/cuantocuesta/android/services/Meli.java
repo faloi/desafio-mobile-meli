@@ -12,6 +12,6 @@ public interface Meli {
   @GET("/sites/MLA/search")
   Example search(@Query("q") String query);
 
-  @GET("/categories/{categoryId}")
+  @GET("/categories/{categoryId}?attributes=id,name,picture,children_categories")
   Category getCategory(@Path("categoryId") String id);
 }
