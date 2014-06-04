@@ -1,6 +1,9 @@
 package com.cuantocuesta.android.views;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
 import android.widget.ImageView;
 import com.cuantocuesta.R;
 import com.cuantocuesta.domain.meli.dtos.Listing;
@@ -21,11 +24,21 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
     inflateView(context);
   }
 
-  private void inflateView(Context context) {
+  private void inflateView(final Context context) {
     LayoutInflater.from(context).inflate(R.layout.view_cell_github, this);
     this.titleTextView = (TextView) this.findViewById(R.id.user_name_textview);
     this.priceTextView = (TextView) this.findViewById(R.id.github_content_textview);
     this.thumbImageView = (ImageView) this.findViewById(R.id.octo_thumbnail_imageview);
+
+    this.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        String intentUri = String.format("meli://item?id=%s", listing.getId());
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(intentUri));
+        context.startActivity(intent);
+      }
+    });
   }
 
   @Override
