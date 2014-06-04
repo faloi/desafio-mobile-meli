@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- the theme applied to the application or activity -->
+    <style name="LightGrayActionBarTheme"
+        parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/LightGrayActionBar</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="LightGrayActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/actionbar_background</item>
+    </style>
+</resources>
