@@ -1,6 +1,7 @@
 package com.cuantocuesta.android.activities;
 
 import android.widget.ListAdapter;
+import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
 import com.cuantocuesta.android.adapters.ListingToPictureAdapter;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.domain.meli.dtos.Example;
@@ -34,6 +35,6 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
 
   @Override
   protected List<Listing> getResultsFromResponse(Example result) {
-    return result.getListings();
+    return result.getResults();
   }
 }

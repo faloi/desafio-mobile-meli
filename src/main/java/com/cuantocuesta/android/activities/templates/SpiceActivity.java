@@ -1,4 +1,4 @@
-package com.cuantocuesta.android.activities;
+package com.cuantocuesta.android.activities.templates;
 
 import android.app.Activity;
 
