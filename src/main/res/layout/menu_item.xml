@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <com.cuantocuesta.android.NiceText
+    android:id="@+id/menu_item_label"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:textSize="40sp"
+    android:gravity="center"
+    tools:text="Opcion 1"/>
+
+</LinearLayout>
