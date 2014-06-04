@@ -1,17 +1,15 @@
 package com.cuantocuesta.android.activities;
 
-import android.widget.ListAdapter;
+import android.content.Context;
 import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
-import com.cuantocuesta.android.adapters.CategoryToPictureAdapter;
-import com.cuantocuesta.android.adapters.ListingToPictureAdapter;
 import com.cuantocuesta.android.services.Meli;
+import com.cuantocuesta.android.views.CategoryView;
 import com.cuantocuesta.domain.meli.dtos.Category;
 import com.cuantocuesta.domain.meli.dtos.ChildrenCategory;
-import com.cuantocuesta.domain.meli.dtos.Example;
-import com.cuantocuesta.domain.meli.dtos.Listing;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 import java.util.List;
 
@@ -31,6 +29,16 @@ public class CategoriesActivity extends ListSpiceActivity<Category.List, Meli, C
     return this.getClothingCategories(meli);
   }
 
+  @Override
+  protected List<Category> getResultsFromResponse(Category.List result) {
+    return result.getCategories();
+  }
+
+  @Override
+  protected SpiceListItemView<Category> createView(Context context) {
+    return new CategoryView(context);
+  }
+
   private Category.List getClothingCategories(final Meli meli) {
     Category category = meli.getCategory(Meli.CLOTHING_BASE_CATEGORY_ID);
     List<ChildrenCategory> childrenCategories = category.getChildrenCategories();
@@ -48,13 +56,4 @@ public class CategoriesActivity extends ListSpiceActivity<Category.List, Meli, C
     return categories;
   }
 
-  @Override
-  protected ListAdapter getAdapter(List<Category> items) {
-    return new CategoryToPictureAdapter(this.getActivity(), getSpiceManagerBinary(), items);
-  }
-
-  @Override
-  protected List<Category> getResultsFromResponse(Category.List result) {
-    return result.getCategories();
-  }
 }

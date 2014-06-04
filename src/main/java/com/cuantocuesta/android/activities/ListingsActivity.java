@@ -1,11 +1,12 @@
 package com.cuantocuesta.android.activities;
 
-import android.widget.ListAdapter;
+import android.content.Context;
 import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
-import com.cuantocuesta.android.adapters.ListingToPictureAdapter;
 import com.cuantocuesta.android.services.Meli;
+import com.cuantocuesta.android.views.ListingView;
 import com.cuantocuesta.domain.meli.dtos.Example;
 import com.cuantocuesta.domain.meli.dtos.Listing;
+import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 import java.util.List;
 
@@ -29,12 +30,12 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
   }
 
   @Override
-  protected ListAdapter getAdapter(List<Listing> items) {
-    return new ListingToPictureAdapter(this.getActivity(), getSpiceManagerBinary(), items);
+  protected List<Listing> getResultsFromResponse(Example result) {
+    return result.getResults();
   }
 
   @Override
-  protected List<Listing> getResultsFromResponse(Example result) {
-    return result.getResults();
+  protected SpiceListItemView<Listing> createView(Context context) {
+    return new ListingView(context);
   }
 }
