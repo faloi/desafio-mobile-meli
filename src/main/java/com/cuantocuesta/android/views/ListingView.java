@@ -22,7 +22,7 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
   }
 
   private void inflateView(Context context) {
-    LayoutInflater.from(context).inflate(R.layout.view_cell_github, this);
+    LayoutInflater.from(context).inflate(R.layout.list_item, this);
     this.titleTextView = (TextView) this.findViewById(R.id.user_name_textview);
     this.priceTextView = (TextView) this.findViewById(R.id.github_content_textview);
     this.thumbImageView = (ImageView) this.findViewById(R.id.octo_thumbnail_imageview);

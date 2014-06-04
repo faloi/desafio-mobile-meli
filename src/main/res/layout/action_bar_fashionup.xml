@@ -3,17 +3,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical"
-  tools:background="#CE5251">
+  android:layout_height="60dp"
+  android:orientation="vertical">
 
   <com.cuantocuesta.android.NiceText
     android:id="@+id/menu_item_label"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:textSize="40sp"
+    android:layout_height="match_parent"
     android:gravity="center"
-    android:textColor="#ffffff"
-    tools:text="Opcion 1"/>
+    android:textColor="#CE5251"
+    android:textSize="25sp"
+    android:paddingLeft="5dp"
+    android:text="FashionUp" />
+
 
 </LinearLayout>
