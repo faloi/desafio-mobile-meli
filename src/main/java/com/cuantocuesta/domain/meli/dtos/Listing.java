@@ -9,6 +9,12 @@ public class Listing implements Displayable {
   public java.lang.Double price;
   public String thumbnail;
 
+  public String getPermalink() {
+    return permalink;
+  }
+
+  public String permalink;
+
   @Override
   public String getThumbnail() {
     return thumbnail;

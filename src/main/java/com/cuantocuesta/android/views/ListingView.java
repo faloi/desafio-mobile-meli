@@ -1,5 +1,6 @@
 package com.cuantocuesta.android.views;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -30,15 +31,7 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
     this.priceTextView = (TextView) this.findViewById(R.id.github_content_textview);
     this.thumbImageView = (ImageView) this.findViewById(R.id.octo_thumbnail_imageview);
 
-    this.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        String intentUri = String.format("meli://item?id=%s", listing.getId());
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(intentUri));
-        context.startActivity(intent);
-      }
-    });
+    this.setOnClickListener(new OpenMeliListing(context));
   }
 
   @Override
@@ -61,5 +54,36 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
     this.listing = listing;
     titleTextView.setText(listing.getTitle());
     priceTextView.setText(String.valueOf(listing.getPrice()));
+  }
+
+  private class OpenMeliListing implements OnClickListener {
+    private final Context context;
+
+    public OpenMeliListing(Context context) {
+      this.context = context;
+    }
+
+    @Override
+    public void onClick(View view) {
+      try {
+        openMeliApp();
+      } catch (ActivityNotFoundException e) {
+        openBrowser();
+      }
+    }
+
+    private void openBrowser() {
+      callIntent(listing.getPermalink());
+    }
+
+    private void openMeliApp() {
+      callIntent(String.format("meli://item?id=%s", listing.getId()));
+    }
+
+    private void callIntent(String intentUri) {
+      Intent intent = new Intent(Intent.ACTION_VIEW);
+      intent.setData(Uri.parse(intentUri));
+      context.startActivity(intent);
+    }
   }
 }
