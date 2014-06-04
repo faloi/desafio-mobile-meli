@@ -2,7 +2,7 @@ package com.cuantocuesta.android.espresso;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
-import com.cuantocuesta.android.MainActivity;
+import com.cuantocuesta.android.activities.MainActivity;
 import com.example.R;
 import com.example.robolectric.DeckardActivity;
 

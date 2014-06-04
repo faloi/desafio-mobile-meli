@@ -1,6 +1,7 @@
 package com.cuantocuesta.android;
 
 import android.app.Activity;
+import com.cuantocuesta.android.activities.MainActivity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
