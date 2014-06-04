@@ -19,7 +19,7 @@
     android:label="@string/app_name">
 
     <activity
-      android:name="com.cuantocuesta.android.MainActivity"
+      android:name=".android.activities.LauncherActivity"
       android:theme="@style/Theme.AppCompat.Light"
       android:label="@string/app_name"
       android:screenOrientation="portrait">

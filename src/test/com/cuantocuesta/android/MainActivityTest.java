@@ -1,6 +1,9 @@
 package com.cuantocuesta.android;
 
 import android.app.Activity;
+
+import com.cuantocuesta.android.activities.LauncherActivity;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -14,7 +17,7 @@ public class MainActivityTest {
 
     @Test
     public void testSomething() throws Exception {
-        Activity activity = Robolectric.buildActivity(MainActivity.class).create().get();
+        Activity activity = Robolectric.buildActivity(LauncherActivity.class).create().get();
         assertTrue(activity != null);
     }
 }
