@@ -69,6 +69,7 @@ dependencies {
     compile 'com.octo.android.robospice:robospice-retrofit:1.4.12'
     compile 'com.octo.android.robospice:robospice-ui-spicelist:1.4.12'
     compile 'com.octo.android.robospice:robospice-okhttp:1.4.12'
+    compile 'com.google.guava:guava:17.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     androidTestCompile 'com.google.guava:guava:14.0.1',
