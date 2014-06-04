@@ -3,7 +3,7 @@ package com.cuantocuesta.domain.meli.dtos;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Generated;
+
 
 public class City {
 

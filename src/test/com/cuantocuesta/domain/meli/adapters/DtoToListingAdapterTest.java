@@ -22,6 +22,8 @@ public class DtoToListingAdapterTest {
     result.setCategory_id("MLA8256");
     result.setPrice(12.5);
 
+
+    assertEquals(true, false);
     assertEquals(new Listing(12.5, "MLA8256"), adapter.getValueFor(result));
   }
 }
