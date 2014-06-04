@@ -1,6 +1,7 @@
 package com.cuantocuesta.android.activities;
 
 import android.content.Context;
+import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.CategoryView;
@@ -40,7 +41,7 @@ public class CategoriesActivity extends ListSpiceActivity<Category.List, Meli, C
   }
 
   private Category.List getClothingCategories(final Meli meli) {
-    Category category = meli.getCategory(Meli.CLOTHING_BASE_CATEGORY_ID);
+    Category category = meli.getCategory(getString(R.string.meli_base_clothing_category));
     List<ChildrenCategory> childrenCategories = category.getChildrenCategories();
 
     Category.List categories = new Category.List();

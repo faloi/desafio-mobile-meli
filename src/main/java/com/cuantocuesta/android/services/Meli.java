@@ -7,8 +7,6 @@ import retrofit.http.Path;
 import retrofit.http.Query;
 
 public interface Meli {
-  static final String CLOTHING_BASE_CATEGORY_ID = "MLA1430";
-
   @GET("/sites/MLA/search")
   Example search(@Query("q") String query);
 

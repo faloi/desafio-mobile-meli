@@ -6,12 +6,12 @@
   <string name="action_update">Update</string>
   <string name="drawer_open">Open Drawer</string>
   <string name="drawer_close">Close Drawer</string>
-  <string name="loading_please_wait">Cargando publicaciones...</string>
+  <string name="loading_please_wait">Carregando anúncios...</string>
   <string name="content_picture">Foto</string>
-    <string name="meli_base_clothing_category">MLA1430</string>
+    <string name="meli_base_clothing_category">MLB1430</string>
     <string-array name="menu_options">
     <item >Home</item>
-    <item >Categorías</item>
-    <item >Listing</item>
+    <item >Categorias</item>
+    <item >Anúncios</item>
   </string-array>
 </resources>
