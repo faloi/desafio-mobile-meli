@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Cuanto Cuesta?</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
+  <string name="hello">Hello RoboSpice!</string>
+  <string name="app_name">RoboSpice Retrofit sample</string>
+  <string name="textview_text">Buscando publicaciones de </string>
+  <string name="action_settings">Settings</string>
 </resources>
