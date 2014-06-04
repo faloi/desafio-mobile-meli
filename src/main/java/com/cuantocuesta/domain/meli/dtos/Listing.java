@@ -1,27 +1,27 @@
 package com.cuantocuesta.domain.meli.dtos;
 
-public class Listing {
+import com.cuantocuesta.android.applicationModels.Displayable;
+
+public class Listing implements Displayable {
+  public String id;
+  public String title;
+  public String subtitle;
+  public java.lang.Double price;
+  public String thumbnail;
+
+  @Override
+  public String getThumbnail() {
+    return thumbnail;
+  }
+  @Override
   public String getId() {
     return id;
   }
 
-  public String id;
-
   public String getTitle() {
     return title;
   }
-
   public Double getPrice() {
     return price;
   }
-
-  public String title;
-  public String subtitle;
-  public java.lang.Double price;
-
-  public String getThumbnail() {
-    return thumbnail;
-  }
-
-  public String thumbnail;
 }

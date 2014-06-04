@@ -1,8 +1,10 @@
 package com.cuantocuesta.domain.meli.dtos;
 
+import com.cuantocuesta.android.applicationModels.Displayable;
+
 import java.util.ArrayList;
 
-public class Category {
+public class Category implements Displayable {
   public String id;
   public String name;
   public String picture;
@@ -12,8 +14,14 @@ public class Category {
     return name;
   }
 
+  @Override
   public String getId() {
     return id;
+  }
+
+  @Override
+  public String getThumbnail() {
+    return this.getPicture();
   }
 
   public String getPicture() {
