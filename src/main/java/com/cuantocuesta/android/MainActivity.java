@@ -2,18 +2,23 @@ package com.cuantocuesta.android;
 
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.SpiceActivity;
+import com.cuantocuesta.android.adapters.ListingToPictureAdapter;
 import com.cuantocuesta.android.services.requests.MeliRequest;
 import com.cuantocuesta.domain.meli.dtos.Example;
-import com.cuantocuesta.domain.meli.dtos.Result;
+import com.cuantocuesta.domain.meli.dtos.Listing;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.util.List;
+
+import roboguice.util.temp.Ln;
+import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
 
 public class MainActivity extends SpiceActivity {
 
@@ -21,9 +26,13 @@ public class MainActivity extends SpiceActivity {
   // ATTRIBUTES
   // ============================================================================================
 
-  private TextView mTextView;
   private MeliRequest meliRequest;
   private String query = "campera de cuero";
+
+  private ListView listingsListView;
+  private View loadingView;
+
+  private ListingToPictureAdapter listingToPictureAdapter;
 
   // ============================================================================================
   // ACTIVITY LIFE CYCLE
@@ -31,11 +40,14 @@ public class MainActivity extends SpiceActivity {
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
+    Ln.getConfig().setLoggingLevel(Log.ERROR);
     super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_PROGRESS);
+    requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+    setProgressBarIndeterminateVisibility(false);
     setContentView(R.layout.activity_main);
 
-    mTextView = (TextView) findViewById(R.id.textview_lorem_ipsum);
+    listingsListView = (ListView) findViewById(R.id.listview_github);
+    loadingView = findViewById(R.id.loading_layout);
 
     meliRequest = new MeliRequest(query);
   }
@@ -43,31 +55,24 @@ public class MainActivity extends SpiceActivity {
   @Override
   protected void onStart() {
     super.onStart();
-    getSpiceManager().execute(meliRequest, "meli", DurationInMillis.ONE_MINUTE, new ItemsRequestListener());
+    loadListings();
   }
 
   // ============================================================================================
   // PRIVATE METHODS
   // ============================================================================================
 
-  private void updateItems(final List<Result> results) {
-    String originalText = getString(R.string.textview_text);
+  private void updateListViewContent(List<Listing> items) {
+    listingToPictureAdapter = new ListingToPictureAdapter(this, getSpiceManagerBinary(), items);
+    listingsListView.setAdapter(listingToPictureAdapter);
 
-    StringBuilder builder = new StringBuilder();
-    builder.append(originalText);
-    builder.append(query + ":");
-    builder.append('\n');
-    builder.append('\n');
-    for (Result result : results) {
-      builder.append('\t');
-      builder.append(result.getTitle());
-      builder.append('\t');
-      builder.append('(');
-      builder.append(result.getPrice());
-      builder.append(')');
-      builder.append('\n');
-    }
-    mTextView.setText(builder.toString());
+    loadingView.setVisibility(View.GONE);
+    listingsListView.setVisibility(View.VISIBLE);
+  }
+
+  private void loadListings() {
+    setProgressBarIndeterminateVisibility(true);
+    getSpiceManager().execute(meliRequest, "meli", DurationInMillis.ONE_MINUTE, new ItemsRequestListener());
   }
 
   // ============================================================================================
@@ -75,16 +80,16 @@ public class MainActivity extends SpiceActivity {
   // ============================================================================================
 
   public final class ItemsRequestListener implements RequestListener<Example> {
-
     @Override
     public void onRequestFailure(SpiceException spiceException) {
-      Toast.makeText(MainActivity.this, "failure", Toast.LENGTH_SHORT).show();
+      setProgressBarIndeterminateVisibility(false);
+      Toast.makeText(MainActivity.this, "Ha ocurrido un error al cargar las publicaciones", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onRequestSuccess(Example example) {
-      Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
-      updateItems(example.results);
+    public void onRequestSuccess(Example result) {
+      setProgressBarIndeterminateVisibility(false);
+      updateListViewContent(result.getListings());
     }
   }
 }

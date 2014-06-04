@@ -1,6 +1,10 @@
 package com.cuantocuesta.domain.meli.dtos;
 
-public class Result {
+public class Listing {
+  public String getId() {
+    return id;
+  }
+
   public String id;
 
   public String getTitle() {
@@ -19,6 +23,11 @@ public class Result {
   public String listing_type_id;
   public String condition;
   public String permalink;
+
+  public String getThumbnail() {
+    return thumbnail;
+  }
+
   public String thumbnail;
   public Address address;
   public Shipping shipping;

@@ -10,7 +10,12 @@ public class Example {
     public String site_id;
     public String query;
     public Paging paging;
-    public List<Result> results = new ArrayList<Result>();
+
+  public List<Listing> getListings() {
+    return results;
+  }
+
+  public List<Listing> results = new ArrayList<Listing>();
     public List<Object> secondary_results = new ArrayList<Object>();
     public List<Object> related_results = new ArrayList<Object>();
     public Sort sort;

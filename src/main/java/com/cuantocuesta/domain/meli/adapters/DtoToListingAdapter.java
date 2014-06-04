@@ -1,10 +1,9 @@
 package com.cuantocuesta.domain.meli.adapters;
 
-import com.cuantocuesta.domain.meli.Listing;
-import com.cuantocuesta.domain.meli.dtos.Result;
+import com.cuantocuesta.domain.meli.dtos.Listing;
 
 public class DtoToListingAdapter {
-  public Listing getValueFor(Result result) {
-    return new Listing(result.getPrice(), result.getCategory_id());
+  public com.cuantocuesta.domain.meli.Listing getValueFor(Listing listing) {
+    return new com.cuantocuesta.domain.meli.Listing(listing.getPrice(), listing.getCategory_id());
   }
 }

@@ -66,6 +66,8 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:19.+'
     compile 'com.octo.android.robospice:robospice-retrofit:1.4.12'
+    compile 'com.octo.android.robospice:robospice-ui-spicelist:1.4.12'
+    compile 'com.octo.android.robospice:robospice-okhttp:1.4.12'
 
     // Espresso
     androidTestCompile files('lib/espresso-1.1.jar', 'lib/testrunner-1.1.jar', 'lib/testrunner-runtime-1.1.jar')

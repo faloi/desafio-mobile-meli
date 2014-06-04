@@ -32,6 +32,10 @@
     <service
       android:name="com.cuantocuesta.android.services.MeliService"
       android:exported="false" />
+
+    <service
+      android:name="com.octo.android.robospice.spicelist.okhttp.OkHttpBitmapSpiceService"
+      android:exported="false" />
   </application>
 
 </manifest>

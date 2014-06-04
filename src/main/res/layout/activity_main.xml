@@ -4,11 +4,34 @@
   android:layout_height="fill_parent"
   android:orientation="vertical" >
 
-  <TextView
-    android:id="@+id/textview_lorem_ipsum"
+  <LinearLayout
+    android:id="@+id/loading_layout"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:singleLine="false"
-    android:text="@string/textview_text" />
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <ProgressBar
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:indeterminate="true" />
+
+    <TextView
+      style="@android:style/TextAppearance.Large"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/loading_please_wait"
+      android:textColor="#222222"
+      android:textSize="20sp" />
+  </LinearLayout>
+
+  <com.octo.android.robospice.spicelist.SpiceListView
+    android:id="@+id/listview_github"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:visibility="gone" />
 
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.cuantocuesta.domain.meli.adapters;
 
-import com.cuantocuesta.domain.meli.Listing;
-import com.cuantocuesta.domain.meli.dtos.Result;
+import com.cuantocuesta.domain.meli.dtos.Listing;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,12 +17,12 @@ public class DtoToListingAdapterTest {
 
   @Test
   public void should_be_able_to_convert_a_dto_to_a_listing() {
-    Result result = new Result();
-    result.setCategory_id("MLA8256");
-    result.setPrice(12.5);
+    Listing listing = new Listing();
+    listing.setCategory_id("MLA8256");
+    listing.setPrice(12.5);
 
 
     assertEquals(true, false);
-    assertEquals(new Listing(12.5, "MLA8256"), adapter.getValueFor(result));
+    assertEquals(new com.cuantocuesta.domain.meli.Listing(12.5, "MLA8256"), adapter.getValueFor(listing));
   }
 }
