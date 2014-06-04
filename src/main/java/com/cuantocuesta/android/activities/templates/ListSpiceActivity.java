@@ -83,7 +83,7 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel extends Disp
 
   private void loadItems() {
     ListSpiceActivity.this.getActivity().setProgressBarIndeterminateVisibility(true);
-    getSpiceManager().execute(request, "meli", DurationInMillis.ONE_MINUTE, new ItemsRequestListener());
+    getSpiceManager().execute(request, this.getClass().getName(), DurationInMillis.ONE_MINUTE, new ItemsRequestListener());
   }
 
   public final class ItemsRequestListener implements RequestListener<TResponse> {
