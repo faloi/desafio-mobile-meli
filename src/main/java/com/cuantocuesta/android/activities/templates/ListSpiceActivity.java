@@ -3,7 +3,6 @@ package com.cuantocuesta.android.activities.templates;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,14 +21,9 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel> extends Spi
   protected View loadingView;
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
+  public void onCreateFrame(Bundle savedInstanceState, View view) {
     Ln.getConfig().setLoggingLevel(Log.ERROR);
-    super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-    setProgressBarIndeterminateVisibility(false);
-    setContentView(R.layout.activity_main);
-
-    listingsListView = (ListView) findViewById(R.id.listview_github);
+    listingsListView = (ListView) view.findViewById(R.id.listview_github);
     loadingView = findViewById(R.id.loading_layout);
 
     request = new RetrofitSpiceRequest<TResponse, TService>(getResponseClass(), getServiceClass()) {
@@ -41,7 +35,12 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel> extends Spi
   }
 
   @Override
-  protected void onStart() {
+  protected int layoutId() {
+    return R.layout.activity_main;
+  }
+
+  @Override
+  public void onStart() {
     super.onStart();
     loadItems();
   }
@@ -60,20 +59,20 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel> extends Spi
   }
 
   private void loadItems() {
-    setProgressBarIndeterminateVisibility(true);
+    ListSpiceActivity.this.getActivity().setProgressBarIndeterminateVisibility(true);
     getSpiceManager().execute(request, "meli", DurationInMillis.ONE_MINUTE, new ItemsRequestListener());
   }
 
   public final class ItemsRequestListener implements RequestListener<TResponse> {
     @Override
     public void onRequestFailure(SpiceException spiceException) {
-      setProgressBarIndeterminateVisibility(false);
-      Toast.makeText(ListSpiceActivity.this, "Ha ocurrido un error al cargar los datos", Toast.LENGTH_SHORT).show();
+      ListSpiceActivity.this.getActivity().setProgressBarIndeterminateVisibility(false);
+      Toast.makeText(ListSpiceActivity.this.getActivity(), "Ha ocurrido un error al cargar los datos", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRequestSuccess(TResponse result) {
-      setProgressBarIndeterminateVisibility(false);
+      ListSpiceActivity.this.getActivity().setProgressBarIndeterminateVisibility(false);
       updateListViewContent(getResultsFromResponse(result));
     }
   }

@@ -50,7 +50,7 @@ public class CategoriesActivity extends ListSpiceActivity<Category.List, Meli, C
 
   @Override
   protected ListAdapter getAdapter(List<Category> items) {
-    return new CategoryToPictureAdapter(this, getSpiceManagerBinary(), items);
+    return new CategoryToPictureAdapter(this.getActivity(), getSpiceManagerBinary(), items);
   }
 
   @Override

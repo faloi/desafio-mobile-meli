@@ -30,7 +30,7 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
 
   @Override
   protected ListAdapter getAdapter(List<Listing> items) {
-    return new ListingToPictureAdapter(this, getSpiceManagerBinary(), items);
+    return new ListingToPictureAdapter(this.getActivity(), getSpiceManagerBinary(), items);
   }
 
   @Override

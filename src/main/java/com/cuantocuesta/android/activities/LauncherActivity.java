@@ -7,13 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.cuantocuesta.R;
 
@@ -22,14 +19,12 @@ public class LauncherActivity extends ActionBarActivity {
   private DrawerLayout mDrawerLayout;
   private ListView mDrawerList;
   private ActionBarDrawerToggle mDrawerToggle;
-  private CharSequence title;
   private FragmentManager fragmentManager;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.fragment_main_view);
-    title = getSupportActionBar().getTitle();
     mPlanetTitles = getResources().getStringArray(R.array.menu_options);
     System.out.println(mPlanetTitles.length);
     mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -92,9 +87,26 @@ public class LauncherActivity extends ActionBarActivity {
    * Swaps fragments in the main content view
    */
 
+  private static final int MAIN_SECTION = 0;
+  private static final int CATEGORIES_SECTION = 1;
+  private static final int LISTINGS_SECTION = 2;
+
   private void selectItem(int position) {
+
+    Fragment fragment;
+
+    switch (position){
+      case CATEGORIES_SECTION:
+        fragment = new CategoriesActivity();
+        break;
+      case LISTINGS_SECTION:
+        fragment = new ListingsActivity();
+        break;
+      default:
+        fragment = new MainContentFragment();
+    }
+
     // create a new fragment and specify the planet to show based on position
-    Fragment fragment = new MainContentFragment();
     Bundle args = new Bundle();
     args.putInt(MainContentFragment.ARG_OS, position);
     fragment.setArguments(args);
