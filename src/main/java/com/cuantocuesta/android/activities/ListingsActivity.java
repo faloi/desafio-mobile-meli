@@ -2,6 +2,7 @@ package com.cuantocuesta.android.activities;
 
 import android.content.Context;
 import com.cuantocuesta.R;
+import com.cuantocuesta.android.ListingsStream;
 import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.ListingView;
@@ -9,11 +10,12 @@ import com.cuantocuesta.domain.meli.dtos.Example;
 import com.cuantocuesta.domain.meli.dtos.Listing;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> {
 
-  private String query = "campera de cuero";
+  private ListingsStream listingsStream;
 
   @Override
   protected Class<Example> getResponseClass() {
@@ -27,7 +29,13 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
 
   @Override
   protected Example performQuery(Meli service) {
-    return service.search(getString(R.string.meli_site), query);
+    this.listingsStream = new ListingsStream(
+      service,
+      getString(R.string.meli_site),
+      Arrays.asList("MLA109276", "MLA109085", "MLA109282")
+    );
+
+    return listingsStream.fetchInitialListings();
   }
 
   @Override

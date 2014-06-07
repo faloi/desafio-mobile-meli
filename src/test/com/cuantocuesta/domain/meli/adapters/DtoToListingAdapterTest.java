@@ -23,6 +23,6 @@ public class DtoToListingAdapterTest {
 
 
     assertEquals(true, false);
-    assertEquals(new com.cuantocuesta.domain.meli.Listing(12.5, "MLA8256"), adapter.getValueFor(listing));
+    assertEquals(new com.cuantocuesta.domain.meli.Listing(12.5, "MLA8257"), adapter.getValueFor(listing));
   }
 }

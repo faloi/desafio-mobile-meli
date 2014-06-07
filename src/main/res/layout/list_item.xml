@@ -43,4 +43,22 @@
     android:textSize="25sp"
     tools:text="otro dato"/>
 
+  <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/listing_dislike"
+    android:id="@+id/dislike_button"
+    android:layout_below="@+id/octo_thumbnail_imageview"
+    android:layout_alignLeft="@+id/github_content_textview"
+    android:layout_alignStart="@+id/github_content_textview" />
+
+  <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/listing_like"
+    android:id="@+id/like_button"
+    android:layout_below="@+id/octo_thumbnail_imageview"
+    android:layout_toRightOf="@+id/github_content_textview"
+    android:layout_marginLeft="54dp" />
+
 </RelativeLayout>
