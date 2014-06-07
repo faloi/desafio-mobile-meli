@@ -7,8 +7,8 @@ import retrofit.http.Path;
 import retrofit.http.Query;
 
 public interface Meli {
-  @GET("/sites/MLA/search")
-  Example search(@Query("q") String query);
+  @GET("/sites/{site}/search")
+  Example search(@Path("site") String site, @Query("q") String query);
 
   @GET("/categories/{categoryId}?attributes=id,name,picture,children_categories")
   Category getCategory(@Path("categoryId") String id);

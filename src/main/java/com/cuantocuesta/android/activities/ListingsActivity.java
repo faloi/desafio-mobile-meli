@@ -1,6 +1,7 @@
 package com.cuantocuesta.android.activities;
 
 import android.content.Context;
+import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.ListingView;
@@ -26,7 +27,7 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
 
   @Override
   protected Example performQuery(Meli service) {
-    return service.search(query);
+    return service.search(getString(R.string.meli_site), query);
   }
 
   @Override

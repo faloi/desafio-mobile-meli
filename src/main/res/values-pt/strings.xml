@@ -9,6 +9,7 @@
   <string name="loading_please_wait">Carregando anúncios...</string>
   <string name="content_picture">Foto</string>
     <string name="meli_base_clothing_category">MLB1430</string>
+    <string name="meli_site">MLB</string>
     <string-array name="menu_options">
     <item >Home</item>
     <item >Categorias</item>
