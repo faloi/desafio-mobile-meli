@@ -45,6 +45,6 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
 
   @Override
   protected SpiceListItemView<Listing> createView(Context context) {
-    return new ListingView(context);
+    return new ListingView(context, listingsStream, this);
   }
 }

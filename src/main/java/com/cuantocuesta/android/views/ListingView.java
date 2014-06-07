@@ -4,14 +4,17 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.view.View;
-import android.widget.ImageView;
-import com.cuantocuesta.R;
-import com.cuantocuesta.domain.meli.dtos.Listing;
-import com.octo.android.robospice.spicelist.SpiceListItemView;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.cuantocuesta.R;
+import com.cuantocuesta.android.ListingsStream;
+import com.cuantocuesta.android.activities.ListingsActivity;
+import com.cuantocuesta.domain.meli.dtos.Listing;
+import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 
 public class ListingView extends RelativeLayout implements SpiceListItemView<Listing> {
@@ -19,9 +22,13 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
   private TextView priceTextView;
   private ImageView thumbImageView;
   private Listing listing;
+  private ListingsStream listingsStream;
+  private ListingsActivity parent;
 
-  public ListingView(Context context) {
+  public ListingView(Context context, ListingsStream listingsStream, ListingsActivity parent) {
     super(context);
+    this.listingsStream = listingsStream;
+    this.parent = parent;
     inflateView(context);
   }
 
@@ -31,7 +38,31 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
     this.priceTextView = (TextView) this.findViewById(R.id.github_content_textview);
     this.thumbImageView = (ImageView) this.findViewById(R.id.octo_thumbnail_imageview);
 
-    this.setOnClickListener(new OpenMeliListing(context));
+//    this.setOnClickListener(new OpenMeliListing(context));
+
+    getLikeButton().setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        listingsStream.registerLike(listing);
+        removeMyself();
+      }
+    });
+
+    getDislikeButton().setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        listingsStream.registerDislike(listing);
+        removeMyself();
+      }
+    });
+  }
+
+  public Button getLikeButton() {
+    return (Button) this.findViewById(R.id.like_button);
+  }
+
+  public Button getDislikeButton() {
+    return (Button) this.findViewById(R.id.dislike_button);
   }
 
   @Override
@@ -54,6 +85,10 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
     this.listing = listing;
     titleTextView.setText(listing.getTitle());
     priceTextView.setText(String.valueOf(listing.getPrice()));
+  }
+
+  private void removeMyself() {
+    parent.removeItem(this.listing);
   }
 
   private class OpenMeliListing implements OnClickListener {

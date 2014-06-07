@@ -23,6 +23,7 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel extends Disp
   protected RetrofitSpiceRequest<TResponse, TService> request;
   protected ListView listingsListView;
   protected View loadingView;
+  private List<TModel> items;
 
   @Override
   public void onCreateFrame(Bundle savedInstanceState, View view) {
@@ -74,6 +75,11 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel extends Disp
     };
   }
 
+  public void removeItem(TModel item) {
+    items.remove(item);
+    updateListViewContent(items);
+  }
+
   private void updateListViewContent(List<TModel> items) {
     listingsListView.setAdapter(getAdapter(items));
 
@@ -96,7 +102,8 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel extends Disp
     @Override
     public void onRequestSuccess(TResponse result) {
       ListSpiceActivity.this.getActivity().setProgressBarIndeterminateVisibility(false);
-      updateListViewContent(getResultsFromResponse(result));
+      items = getResultsFromResponse(result);
+      updateListViewContent(items);
     }
   }
 }
