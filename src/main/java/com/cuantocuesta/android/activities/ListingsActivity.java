@@ -2,12 +2,12 @@ package com.cuantocuesta.android.activities;
 
 import android.content.Context;
 import com.cuantocuesta.R;
-import com.cuantocuesta.android.ListingsStream;
 import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.ListingView;
-import com.cuantocuesta.domain.meli.dtos.Example;
-import com.cuantocuesta.domain.meli.dtos.Listing;
+import com.cuantocuesta.domain.ListingsStream;
+import com.cuantocuesta.domain.meli.Example;
+import com.cuantocuesta.domain.meli.Listing;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 import java.util.Arrays;
@@ -35,7 +35,7 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
       Arrays.asList("MLA109276", "MLA109085", "MLA109282")
     );
 
-    return listingsStream.fetchInitialListings();
+    return new Example(listingsStream.getMoreListings());
   }
 
   @Override

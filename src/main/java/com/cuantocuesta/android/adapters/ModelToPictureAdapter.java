@@ -2,8 +2,6 @@ package com.cuantocuesta.android.adapters;
 
 import android.content.Context;
 import android.view.ViewGroup;
-import com.cuantocuesta.android.views.CategoryView;
-import com.cuantocuesta.domain.meli.dtos.Category;
 import com.octo.android.robospice.request.okhttp.simple.OkHttpBitmapRequest;
 import com.octo.android.robospice.request.simple.IBitmapRequest;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
@@ -30,6 +28,8 @@ public abstract class ModelToPictureAdapter<TModel> extends OkHttpSpiceArrayAdap
   }
 
   protected abstract SpiceListItemView<TModel> getView(Context context);
+
   protected abstract String getId(TModel model);
+
   protected abstract String getPictureUrl(TModel model);
 }

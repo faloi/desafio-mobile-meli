@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.cuantocuesta.R;
-import com.cuantocuesta.domain.meli.dtos.Category;
+import com.cuantocuesta.domain.meli.Category;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 public class CategoryView extends RelativeLayout implements SpiceListItemView<Category> {

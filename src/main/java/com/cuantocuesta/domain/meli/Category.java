@@ -1,4 +1,4 @@
-package com.cuantocuesta.domain.meli.dtos;
+package com.cuantocuesta.domain.meli;
 
 import com.cuantocuesta.android.applicationModels.Displayable;
 

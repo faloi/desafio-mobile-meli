@@ -1,15 +1,17 @@
 
-package com.cuantocuesta.domain.meli.dtos;
+package com.cuantocuesta.domain.meli;
 
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Example {
   public String query;
+
+  public Example() {
+    this(new ArrayList<Listing>());
+  }
 
   public Example(Iterable<Listing> listings) {
     this.results = Lists.newArrayList(listings);

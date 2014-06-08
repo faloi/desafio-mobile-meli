@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.cuantocuesta.R;
-import com.cuantocuesta.android.ListingsStream;
 import com.cuantocuesta.android.activities.ListingsActivity;
-import com.cuantocuesta.domain.meli.dtos.Listing;
+import com.cuantocuesta.domain.ListingsStream;
+import com.cuantocuesta.domain.meli.Listing;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 

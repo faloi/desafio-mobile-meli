@@ -1,7 +1,7 @@
 package com.cuantocuesta.android.services;
 
-import com.cuantocuesta.domain.meli.dtos.Category;
-import com.cuantocuesta.domain.meli.dtos.Example;
+import com.cuantocuesta.domain.meli.Category;
+import com.cuantocuesta.domain.meli.Example;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;

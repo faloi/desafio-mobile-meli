@@ -1,4 +1,4 @@
-package com.cuantocuesta.domain.meli.dtos;
+package com.cuantocuesta.domain.meli;
 
 public class ChildrenCategory {
   public String getId() {

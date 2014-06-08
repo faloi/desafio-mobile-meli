@@ -1,4 +1,4 @@
-package com.cuantocuesta.domain.meli.dtos;
+package com.cuantocuesta.domain.meli;
 
 import com.cuantocuesta.android.applicationModels.Displayable;
 
@@ -19,6 +19,7 @@ public class Listing implements Displayable {
   public String getThumbnail() {
     return thumbnail;
   }
+
   @Override
   public String getId() {
     return id;
@@ -27,6 +28,7 @@ public class Listing implements Displayable {
   public String getTitle() {
     return title;
   }
+
   public Double getPrice() {
     return price;
   }
