@@ -13,8 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import com.cuantocuesta.R;
 
 public class LauncherActivity extends ActionBarActivity {
@@ -87,6 +85,8 @@ public class LauncherActivity extends ActionBarActivity {
   protected void onPostCreate(Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
     mDrawerToggle.syncState();
+
+    selectItem(LISTINGS_SECTION);
   }
 
   @Override

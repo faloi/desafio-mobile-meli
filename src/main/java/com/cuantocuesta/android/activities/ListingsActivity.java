@@ -29,13 +29,7 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
 
   @Override
   protected Example performQuery(Meli service) {
-    this.listingsStream = new ListingsStream(
-      service,
-      getString(R.string.meli_site),
-      Arrays.asList("MLA109276", "MLA109085", "MLA109282")
-    );
-
-    return new Example(listingsStream.getMoreListings());
+    return new Example(createOrGetListingsStream(service).getMoreListings());
   }
 
   @Override
@@ -46,5 +40,17 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
   @Override
   protected SpiceListItemView<Listing> createView(Context context) {
     return new ListingView(context, listingsStream, this);
+  }
+
+  private ListingsStream createOrGetListingsStream(Meli service) {
+    if (this.listingsStream == null) {
+      this.listingsStream = new ListingsStream(
+        service,
+        getString(R.string.meli_site),
+        Arrays.asList("MLA109276", "MLA109085", "MLA109282")
+      );
+    }
+
+    return listingsStream;
   }
 }

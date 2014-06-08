@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.cuantocuesta.R;
 import com.cuantocuesta.android.adapters.ModelToPictureAdapter;
 import com.cuantocuesta.android.applicationModels.Displayable;
-import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
@@ -81,6 +80,11 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel extends Disp
   }
 
   private void updateListViewContent(List<TModel> items) {
+    if (items.isEmpty()) {
+      this.loadItems();
+      return;
+    }
+
     listingsListView.setAdapter(getAdapter(items));
 
     loadingView.setVisibility(View.GONE);
@@ -89,7 +93,7 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel extends Disp
 
   private void loadItems() {
     ListSpiceActivity.this.getActivity().setProgressBarIndeterminateVisibility(true);
-    getSpiceManager().execute(request, this.getClass().getName(), DurationInMillis.ONE_MINUTE, new ItemsRequestListener());
+    getSpiceManager().execute(request, new ItemsRequestListener());
   }
 
   public final class ItemsRequestListener implements RequestListener<TResponse> {
