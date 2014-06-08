@@ -2,9 +2,12 @@ package com.cuantocuesta.android.services;
 
 import com.cuantocuesta.domain.meli.Category;
 import com.cuantocuesta.domain.meli.Example;
+import com.cuantocuesta.domain.meli.Listing;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
+
+import java.util.List;
 
 public interface Meli {
   @GET("/categories/{categoryId}?attributes=id,name,picture,children_categories")
@@ -17,4 +20,7 @@ public interface Meli {
     @Query("offset") int offset,
     @Query("limit") int limit
   );
+
+  @GET("/items?attributes=id,pictures,title,price")
+  List<Listing> getListingsDetails(@Query("ids") String commaSeparatedIds);
 }

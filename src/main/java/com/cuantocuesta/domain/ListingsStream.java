@@ -3,6 +3,7 @@ package com.cuantocuesta.domain;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.domain.meli.Listing;
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
@@ -43,7 +44,18 @@ public class ListingsStream {
 
     Iterable<Listing> listings = Iterables.concat(examples);
 
-    return randomize(listings);
+    return randomize(fetchAdditionalData(listings));
+  }
+
+  private List<Listing> fetchAdditionalData(Iterable<Listing> listings) {
+    String ids = Joiner.on(",").join(Iterables.transform(listings, new Function<Listing, Object>() {
+      @Override
+      public String apply(Listing listing) {
+        return listing.getId();
+      }
+    }));
+
+    return service.getListingsDetails(ids);
   }
 
   public void registerLike(Listing listing) {
