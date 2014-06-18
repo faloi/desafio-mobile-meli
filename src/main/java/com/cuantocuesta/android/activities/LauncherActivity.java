@@ -87,7 +87,7 @@ public class LauncherActivity extends ActionBarActivity {
     super.onPostCreate(savedInstanceState);
     mDrawerToggle.syncState();
 
-    selectItem(LISTINGS_SECTION);
+    selectItem(MAIN_SECTION);
   }
 
   @Override
