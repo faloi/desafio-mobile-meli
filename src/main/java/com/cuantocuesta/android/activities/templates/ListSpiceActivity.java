@@ -79,7 +79,7 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel extends Disp
     updateListViewContent(items);
   }
 
-  private void updateListViewContent(List<TModel> items) {
+  protected void updateListViewContent(List<TModel> items) {
     if (items.isEmpty()) {
       this.loadItems();
       return;
@@ -109,5 +109,9 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel extends Disp
       items = getResultsFromResponse(result);
       updateListViewContent(items);
     }
+  }
+
+  public ListView getListingsListView() {
+    return listingsListView;
   }
 }

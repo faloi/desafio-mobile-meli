@@ -29,28 +29,6 @@
       </intent-filter>
     </activity>
 
-    <activity
-      android:name=".android.activities.ListingsActivity"
-      android:theme="@style/Theme.AppCompat.Light"
-      android:label="@string/app_name"
-      android:screenOrientation="portrait">
-
-      <intent-filter>
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-
-    <activity
-      android:name=".android.activities.CategoriesActivity"
-      android:theme="@style/Theme.AppCompat.Light"
-      android:label="@string/app_name"
-      android:screenOrientation="portrait">
-
-      <intent-filter>
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-
     <service
       android:name="com.cuantocuesta.android.services.MeliService"
       android:exported="false" />

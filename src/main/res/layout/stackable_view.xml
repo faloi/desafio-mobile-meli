@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#e6e6e6"
+  android:orientation="vertical">
+
+  <FrameLayout
+    android:id="@+id/stack_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:background="#ffffff"
+    android:layout_above="@+id/buttons_container">
+  </FrameLayout>
+
+  <LinearLayout
+    android:id="@+id/buttons_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/feo"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="Feo" />
+
+    <Button
+      android:id="@+id/lindo"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="Lindo" />
+  </LinearLayout>
+
+
+  <LinearLayout
+    android:id="@+id/loading_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ProgressBar
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:indeterminate="true" />
+
+    <TextView
+      style="@android:style/TextAppearance.Large"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/loading_please_wait"
+      android:textColor="#222222"
+      android:textSize="20sp" />
+  </LinearLayout>
+
+  <com.octo.android.robospice.spicelist.SpiceListView
+    android:id="@+id/listview_github"
+    android:layout_below="@id/buttons_container"
+    android:layout_marginTop="80dp"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:divider="#00000000"
+    android:visibility="gone" />
+
+</RelativeLayout>

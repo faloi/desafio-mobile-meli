@@ -11,7 +11,7 @@ import com.google.common.collect.Ordering;
 import java.util.*;
 
 public class ListingsStream {
-  public static final int LIMIT = 1;
+  public static final int LIMIT = 10;
 
   private Meli service;
   private String site;

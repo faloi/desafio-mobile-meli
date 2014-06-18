@@ -1,8 +1,9 @@
 package com.cuantocuesta.domain;
 
 import com.cuantocuesta.android.services.Meli;
-import com.cuantocuesta.domain.meli.Example;
+import com.cuantocuesta.domain.meli.ResultContainer;
 import com.cuantocuesta.domain.meli.Listing;
+
 import org.junit.*;
 
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class ListingsStreamTest {
   @Before
   public void setUp() {
     service = mock(Meli.class);
-    when(service.searchByCategory(anyString(), anyString(), anyInt(), anyInt())).thenReturn(new Example());
+    when(service.searchByCategory(anyString(), anyString(), anyInt(), anyInt())).thenReturn(new ResultContainer());
   }
 
   @Test
@@ -52,7 +53,7 @@ public class ListingsStreamTest {
   @Test
   public void Should_get_the_listings_details_using_items_multiget() throws Exception {
     when(service.searchByCategory("MLA", "MLA109276", 0, ListingsStream.LIMIT)).thenReturn(
-      new Example(
+      new ResultContainer(
         Arrays.asList(new Listing("MLA1111"), new Listing("MLA2222"))
       )
     );
@@ -70,7 +71,7 @@ public class ListingsStreamTest {
   @Test
   public void Should_return_listings_with_pictures() throws Exception {
     when(service.searchByCategory("MLA", "MLA109276", 0, ListingsStream.LIMIT)).thenReturn(
-      new Example(
+      new ResultContainer(
         Arrays.asList(new Listing("MLA1111"))
       )
     );

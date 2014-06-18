@@ -6,14 +6,14 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Example {
+public class ResultContainer {
   public String query;
 
-  public Example() {
+  public ResultContainer() {
     this(new ArrayList<Listing>());
   }
 
-  public Example(Iterable<Listing> listings) {
+  public ResultContainer(Iterable<Listing> listings) {
     this.results = Lists.newArrayList(listings);
   }
 

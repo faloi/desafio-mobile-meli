@@ -43,18 +43,26 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
     getLikeButton().setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-        listingsStream.registerLike(listing);
-        removeMyself();
+        liked();
       }
     });
 
     getDislikeButton().setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-        listingsStream.registerDislike(listing);
-        removeMyself();
+        disliked();
       }
     });
+  }
+
+  public void disliked() {
+    listingsStream.registerDislike(listing);
+    removeMyself();
+  }
+
+  public void liked() {
+    listingsStream.registerLike(listing);
+    removeMyself();
   }
 
   public Button getLikeButton() {

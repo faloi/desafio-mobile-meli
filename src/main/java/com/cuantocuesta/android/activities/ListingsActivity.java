@@ -6,20 +6,20 @@ import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.ListingView;
 import com.cuantocuesta.domain.ListingsStream;
-import com.cuantocuesta.domain.meli.Example;
+import com.cuantocuesta.domain.meli.ResultContainer;
 import com.cuantocuesta.domain.meli.Listing;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> {
+public class ListingsActivity extends ListSpiceActivity<ResultContainer, Meli, Listing> {
 
-  private ListingsStream listingsStream;
+  protected ListingsStream listingsStream;
 
   @Override
-  protected Class<Example> getResponseClass() {
-    return Example.class;
+  protected Class<ResultContainer> getResponseClass() {
+    return ResultContainer.class;
   }
 
   @Override
@@ -28,12 +28,12 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
   }
 
   @Override
-  protected Example performQuery(Meli service) {
-    return new Example(createOrGetListingsStream(service).getMoreListings());
+  protected ResultContainer performQuery(Meli service) {
+    return new ResultContainer(createOrGetListingsStream(service).getMoreListings());
   }
 
   @Override
-  protected List<Listing> getResultsFromResponse(Example result) {
+  protected List<Listing> getResultsFromResponse(ResultContainer result) {
     return result.getResults();
   }
 
@@ -42,7 +42,7 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
     return new ListingView(context, listingsStream, this);
   }
 
-  private ListingsStream createOrGetListingsStream(Meli service) {
+  protected ListingsStream createOrGetListingsStream(Meli service) {
     if (this.listingsStream == null) {
       this.listingsStream = new ListingsStream(
         service,
@@ -51,6 +51,10 @@ public class ListingsActivity extends ListSpiceActivity<Example, Meli, Listing> 
       );
     }
 
+    return listingsStream;
+  }
+
+  public ListingsStream getListingsStream() {
     return listingsStream;
   }
 }

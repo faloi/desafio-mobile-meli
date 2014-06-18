@@ -1,8 +1,9 @@
 package com.cuantocuesta.android.services;
 
 import com.cuantocuesta.domain.meli.Category;
-import com.cuantocuesta.domain.meli.Example;
+import com.cuantocuesta.domain.meli.ResultContainer;
 import com.cuantocuesta.domain.meli.Listing;
+
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -14,7 +15,7 @@ public interface Meli {
   Category getCategory(@Path("categoryId") String id);
 
   @GET("/sites/{site}/search")
-  Example searchByCategory(
+  ResultContainer searchByCategory(
     @Path("site") String site,
     @Query("category") String category,
     @Query("offset") int offset,

@@ -1,32 +1,35 @@
 package com.cuantocuesta.android.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.cuantocuesta.R;
+import com.cuantocuesta.android.views.ItemStackableView;
+import com.cuantocuesta.domain.meli.Listing;
 
-public class MainContentFragment  extends Fragment {
+import java.util.List;
+
+public class MainContentFragment  extends ListingsActivity {
   public static final String ARG_OS= "OS";
-  private Integer numero;
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_main_container, null);
+  private ItemStackableView stackableView;
 
-    TextView textView = (TextView) view.findViewById(R.id.textView1);
-    textView.setText(numero.toString());
-    return view;
-  }
   @Override
-  public void onActivityCreated(Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
+  public void onCreateFrame(Bundle savedInstanceState, View view) {
+    super.onCreateFrame(savedInstanceState, view);
+    stackableView = (ItemStackableView) findViewById(R.id.stackable_view);
+    stackableView.build(this);
   }
+
   @Override
-  public void setArguments(Bundle args) {
-    numero = args.getInt(ARG_OS);
+  protected void updateListViewContent(List<Listing> items) {
+    super.updateListViewContent(items);
+    stackableView.populate(this);
   }
+
+  @Override
+  protected int layoutId() {
+    return R.layout.home_fragment;
+  }
+
+
 }
