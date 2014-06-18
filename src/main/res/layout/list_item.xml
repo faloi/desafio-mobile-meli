@@ -13,7 +13,7 @@
     android:layout_height="match_parent"
     android:scaleType="centerInside"
     android:layout_alignParentRight="true"
-    android:background="#eeeeef"
+    android:background="#ffffff"
     tools:src="@drawable/ejemplo"
     android:layout_alignParentTop="true"
     android:contentDescription="@string/content_picture"/>

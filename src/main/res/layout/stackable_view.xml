@@ -17,22 +17,25 @@
   <LinearLayout
     android:id="@+id/buttons_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
+    android:layout_marginBottom="20dp"
     android:layout_alignParentBottom="true"
     android:orientation="horizontal">
 
-    <Button
+    <ImageView
       android:id="@+id/feo"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_weight="1"
+      android:src="@drawable/thumb_down"
       android:text="Feo" />
 
-    <Button
+    <ImageView
       android:id="@+id/lindo"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_weight="1"
+      android:src="@drawable/thumb_up"
       android:text="Lindo" />
   </LinearLayout>
 
