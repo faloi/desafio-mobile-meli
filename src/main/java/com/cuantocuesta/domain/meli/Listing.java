@@ -11,6 +11,7 @@ public class Listing implements Displayable {
   public java.lang.Double price;
   public List<Picture> pictures;
   public Shipping shipping;
+  public Long officialStoreId;
 
   public Listing() {
     this.pictures = new ArrayList<Picture>();
@@ -57,6 +58,10 @@ public class Listing implements Displayable {
 
   public boolean hasFreeShipping() {
     return this.shipping.isFree();
+  }
+
+  public boolean isFromOfficialStore() {
+    return this.officialStoreId != null;
   }
 }
 
