@@ -10,6 +10,7 @@ public class Listing implements Displayable {
   public String title;
   public java.lang.Double price;
   public List<Picture> pictures;
+  public Shipping shipping;
 
   public Listing() {
     this.pictures = new ArrayList<Picture>();
@@ -53,4 +54,9 @@ public class Listing implements Displayable {
       this.getPictures().add(new Picture(p));
     }
   }
+
+  public boolean hasFreeShipping() {
+    return this.shipping.isFree();
+  }
 }
+
