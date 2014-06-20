@@ -12,7 +12,9 @@
   <string name="meli_site">MLA</string>
   <string name="listing_dislike">No me gusta</string>
   <string name="listing_like">Me gusta</string>
-  <string-array name="menu_options">
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string-array name="menu_options">
     <item>Home</item>
     <item>Categorías</item>
     <item>Listing</item>

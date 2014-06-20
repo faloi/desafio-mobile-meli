@@ -14,7 +14,8 @@
     android:textColor="#CE5251"
     android:textSize="25sp"
     android:paddingLeft="5dp"
-    android:text="FashionUp" />
+    android:text="@string/app_name"
+    />
 
 
 </LinearLayout>
