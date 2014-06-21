@@ -11,8 +11,8 @@ import retrofit.http.Query;
 import java.util.List;
 
 public interface Meli {
-  @GET("/categories/{categoryId}?attributes=id,name,picture,children_categories")
-  Category getCategory(@Path("categoryId") String id);
+  @GET("/categories/{id}?attributes=id,name,picture,children_categories")
+  Category getCategory(@Path("id") String id);
 
   @GET("/sites/{site}/search")
   ResultContainer searchByCategory(
@@ -22,9 +22,12 @@ public interface Meli {
     @Query("limit") int limit
   );
 
-  @GET("/items?attributes=id,pictures,title,price,variations")
+  @GET("/items?attributes=id,pictures,title,price")
   List<Listing> getListingsDetails(@Query("ids") String commaSeparatedIds);
 
-  @GET("/categories/{categoryId}/attributes")
-  Attribute.List getAttributesOfCategory(@Path("categoryId") String categoryId);
+  @GET("/categories/{id}/attributes")
+  Attribute.List getAttributesOfCategory(@Path("id") String categoryId);
+
+  @GET("/items/{id}?attributes=variations")
+  Listing getVariations(@Path("id") String id);
 }

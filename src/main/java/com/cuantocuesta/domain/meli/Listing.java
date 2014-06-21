@@ -8,6 +8,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class Listing implements Displayable {
@@ -72,9 +74,7 @@ public class Listing implements Displayable {
   }
 
   public void addVariations(Variation... variations) {
-    for (Variation v : variations) {
-      this.getVariations().add(v);
-    }
+    this.addVariations(Arrays.asList(variations));
   }
 
   public List<Variation> getVariations() {
@@ -97,5 +97,8 @@ public class Listing implements Displayable {
     }));
   }
 
+  public void addVariations(Collection<Variation> variations) {
+    this.getVariations().addAll(variations);
+  }
 }
 
