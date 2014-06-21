@@ -64,13 +64,13 @@ public class Variation {
     return attributeCombinations;
   }
 
-  public String getSize() {
+  public AttributeCombination getSizeAttribute() {
     return Iterables.find(getAttributeCombinations(), new Predicate<AttributeCombination>() {
       @Override
       public boolean apply(AttributeCombination input) {
         return input.getNormalizedName().startsWith("ta");
       }
-    }).getValueName();
+    });
   }
 
   public List<String> getPictureIds() {

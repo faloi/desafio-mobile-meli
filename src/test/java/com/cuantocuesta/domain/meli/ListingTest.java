@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -133,6 +134,55 @@ public class ListingTest {
       listing.getSizes()
     );
   }
+
+  @Test
+  public void Fixed_sizes_should_be_ordered_by_their_ids() {
+    listing.addVariations(
+      new Variation(Arrays.asList(
+        new AttributeCombination("Tamanho", "71993", "PP")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Tamanho", "71996", "G")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Tamanho", "71995", "M")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Tamanho", "71994", "P")
+      ))
+    );
+
+    Iterator<String> sizesIterator = listing.getSizes().iterator();
+    assertEquals("PP", sizesIterator.next());
+    assertEquals("P", sizesIterator.next());
+    assertEquals("M", sizesIterator.next());
+    assertEquals("G", sizesIterator.next());
+  }
+
+  @Test
+  public void Numerical_sizes_should_be_ordered_by_their_natural_order() {
+    listing.addVariations(
+      new Variation(Arrays.asList(
+        new AttributeCombination("Tamanho", "42")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Tamanho", "38")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Tamanho", "40")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Tamanho", "36")
+      ))
+    );
+
+    Iterator<String> sizesIterator = listing.getSizes().iterator();
+    assertEquals("36", sizesIterator.next());
+    assertEquals("38", sizesIterator.next());
+    assertEquals("40", sizesIterator.next());
+    assertEquals("42", sizesIterator.next());
+  }
+
 
   @Test
   public void Can_calculate_the_pictures_for_each_combinated_color() {

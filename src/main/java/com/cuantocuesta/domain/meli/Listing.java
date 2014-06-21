@@ -6,6 +6,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Ordering;
 
 import java.util.*;
 
@@ -99,12 +100,21 @@ public class Listing implements Displayable {
   }
 
   public Set<String> getSizes() {
-    return ImmutableSet.copyOf(Iterables.transform(getVariations(), new Function<Variation, String>() {
+    ImmutableSet<AttributeCombination> attributeCombinations = ImmutableSet.copyOf(Iterables.transform(getVariations(), new Function<Variation, AttributeCombination>() {
       @Override
-      public String apply(Variation input) {
-        return input.getSize();
+      public AttributeCombination apply(Variation input) {
+        return input.getSizeAttribute();
       }
     }));
+
+    Iterable<String> orderedSizes = Iterables.transform(Ordering.natural().sortedCopy(attributeCombinations), new Function<AttributeCombination, String>() {
+      @Override
+      public String apply(AttributeCombination input) {
+        return input.getValueName();
+      }
+    });
+
+    return ImmutableSet.copyOf(orderedSizes);
   }
 
   public void addPictures(Picture... pictures) {
