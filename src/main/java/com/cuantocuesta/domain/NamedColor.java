@@ -2,7 +2,7 @@ package com.cuantocuesta.domain;
 
 public class NamedColor {
   public String name;
-  public String color;
+  public String rgb;
 
   @Override
   public boolean equals(Object o) {
@@ -11,7 +11,7 @@ public class NamedColor {
 
     NamedColor that = (NamedColor) o;
 
-    if (!color.equals(that.color)) return false;
+    if (!rgb.equals(that.rgb)) return false;
     if (!name.equals(that.name)) return false;
 
     return true;
@@ -20,12 +20,20 @@ public class NamedColor {
   @Override
   public int hashCode() {
     int result = name.hashCode();
-    result = 31 * result + color.hashCode();
+    result = 31 * result + rgb.hashCode();
     return result;
   }
 
-  public NamedColor(String name, String color) {
+  public NamedColor(String name, String rgb) {
     this.name = name;
-    this.color = color;
+    this.rgb = rgb;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getRgb() {
+    return rgb;
   }
 }
