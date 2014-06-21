@@ -31,12 +31,12 @@ public class ItemStackableView extends RelativeLayout {
     this.setOnTouchListener(new OnSwipeTouchListener(listingsActivity.getActivity()) {
       @Override
       public void onSwipeLeft() {
-        ItemStackableView.this.like(stack, listingsActivity);
+        ItemStackableView.this.like(listingsActivity);
       }
 
       @Override
       public void onSwipeRight() {
-        ItemStackableView.this.dislike(stack, listingsActivity);
+        ItemStackableView.this.dislike(listingsActivity);
       }
     });
 
@@ -44,7 +44,7 @@ public class ItemStackableView extends RelativeLayout {
 
       @Override
       public void onClick(View v) {
-        dislike(v, listingsActivity);
+        dislike(listingsActivity);
       }
     });
 
@@ -52,7 +52,7 @@ public class ItemStackableView extends RelativeLayout {
 
       @Override
       public void onClick(View v) {
-        like(v, listingsActivity);
+        like(listingsActivity);
       }
     });
 
@@ -65,12 +65,12 @@ public class ItemStackableView extends RelativeLayout {
     });
   }
 
-  public void dislike(View v, ListingsActivity listingsActivity) {
+  public void dislike(ListingsActivity listingsActivity) {
     if (current != null) current.disliked();
     replaceNext(listingsActivity, Animacion.ANIMATE_LEFT);
   }
 
-  public void like(final View v, final ListingsActivity listingsActivity) {
+  public void like(final ListingsActivity listingsActivity) {
     if (current != null) current.liked();
     replaceNext(listingsActivity, Animacion.ANIMATE_RIGHT);
   }
