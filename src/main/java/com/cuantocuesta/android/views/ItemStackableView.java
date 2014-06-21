@@ -15,13 +15,10 @@ import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.ListingsActivity;
 import com.google.common.base.Function;
 
-import java.util.concurrent.Callable;
-
 public class ItemStackableView extends RelativeLayout {
 
   private FrameLayout stack;
   private ListingView current;
-  private ListingView next;
   private Function<ItemStackableView,ItemStackableView> onShowDetail;
 
   public ItemStackableView(Context listingsActivity, AttributeSet attrs) {
@@ -72,55 +69,31 @@ public class ItemStackableView extends RelativeLayout {
 
   public void dislike(View v, ListingsActivity listingsActivity) {
     if (current != null) current.disliked();
-    View lastChild = stack.getChildAt(stack.getChildCount() - 1);
-    slideToLeft(lastChild);
-    stack.removeView(lastChild);
-    replaceNext(v, listingsActivity);
+    replaceNext(v, listingsActivity, Animacion.ANIMATE_LEFT);
   }
 
   public void like(final View v, final ListingsActivity listingsActivity) {
     if (current != null) current.liked();
-    View lastChild = stack.getChildAt(stack.getChildCount() - 1);
-    slideToRight(lastChild);
-    stack.removeView(lastChild);
-    replaceNext(v, listingsActivity);
+    replaceNext(v, listingsActivity, Animacion.ANIMATE_RIGHT);
   }
 
   public void showDetail(){
     this.onShowDetail.apply(this);
   }
 
-  protected void replaceNext(View v, ListingsActivity listingsActivity) {
+  protected void replaceNext(View v, ListingsActivity listingsActivity, Animacion animacion) {
+    if(stack.getChildCount() == 0) return;
+
     ListAdapter adapter = listingsActivity.getListingsListView().getAdapter();
+
+    View lastChild = stack.getChildAt(stack.getChildCount() - 1);
+    animacion.animate(lastChild);
+    stack.removeView(lastChild);
+
     if(!adapter.isEmpty()){
-      current = next;
-
-      if(adapter.getCount() > 1){
-        next = new ListingView(v.getContext(), listingsActivity.getListingsStream(), listingsActivity);
-        stack.addView(getListingView(1, next, adapter), 0);
-      }
+        current = new ListingView(v.getContext(), listingsActivity.getListingsStream(), listingsActivity);
+        stack.addView(getListingView(0, current, adapter), 0);
     }
-  }
-
-  public void slideToLeft(View view){
-    if(view != null){
-      TranslateAnimation animate = new TranslateAnimation(0,view.getWidth(),0,0);
-      slide(view, animate);
-    }
-  }
-
-  public void slideToRight(View view){
-    if (view != null) {
-      TranslateAnimation animate = new TranslateAnimation(0,-view.getWidth(),0,0);
-      slide(view, animate);
-    }
-  }
-
-  public void slide(View view, TranslateAnimation animate) {
-    animate.setDuration(400);
-    animate.setFillAfter(true);
-    view.startAnimation(animate);
-    view.setVisibility(View.GONE);
   }
 
   private ImageView getListingView(int pos, ListingView someView, ListAdapter adapter) {
@@ -132,17 +105,12 @@ public class ItemStackableView extends RelativeLayout {
     return imageView;
   }
 
+
   public void populate(ListingsActivity listingsActivity) {
     if(current == null && listingsActivity.getListingsListView().getAdapter().getCount()>0){
       current = new ListingView(listingsActivity.getActivity(), listingsActivity.getListingsStream(), listingsActivity);
       stack.addView(getListingView(0, current, listingsActivity.getListingsListView().getAdapter()));
     }
-
-    if(next == null  && listingsActivity.getListingsListView().getAdapter().getCount()>1){
-      next = new ListingView(listingsActivity.getActivity(), listingsActivity.getListingsStream(), listingsActivity);
-      stack.addView(getListingView(1, next, listingsActivity.getListingsListView().getAdapter()));
-    }
-
   }
 
   public void setOnShowDetail(Function<ItemStackableView, ItemStackableView> onShowDetail) {
@@ -151,5 +119,33 @@ public class ItemStackableView extends RelativeLayout {
 
   public ListingView getCurrent() {
     return current;
+  }
+
+  private enum Animacion {
+    ANIMATE_LEFT{
+      public void animate(View view){
+        if(view != null){
+          TranslateAnimation animate = new TranslateAnimation(0,view.getWidth(),0,0);
+          slide(view, animate);
+        }
+      }
+    },
+    ANIMATE_RIGHT{
+      public void animate(View view){
+        if (view != null) {
+          TranslateAnimation animate = new TranslateAnimation(0,-view.getWidth(),0,0);
+          slide(view, animate);
+        }
+      }
+    };
+
+    public abstract void animate(View view);
+
+    public void slide(View view, TranslateAnimation animate) {
+      animate.setDuration(400);
+      animate.setFillAfter(true);
+      view.startAnimation(animate);
+      view.setVisibility(View.GONE);
+    }
   }
 }

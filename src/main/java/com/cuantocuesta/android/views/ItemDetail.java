@@ -50,9 +50,13 @@ public class ItemDetail extends RelativeLayout {
 
     Joiner joiner = Joiner.on(" ").skipNulls();
     talle.setText(getContext().getString(R.string.talle, joiner.join(listing.getListing().getSizes())));
+
+    this.show();
+  }
+
+  public void show() {
     ItemDetail.this.setVisibility(VISIBLE);
     this.animate();
-
   }
 
   private void updateColors(Listing listing) {
