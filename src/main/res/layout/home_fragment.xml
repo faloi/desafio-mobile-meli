@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
   android:layout_height="match_parent">
 
   <com.cuantocuesta.android.views.ItemStackableView
     android:id="@+id/stackable_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
   </com.cuantocuesta.android.views.ItemStackableView>
-</LinearLayout>
+
+  <com.cuantocuesta.android.views.ItemDetail
+    android:id="@+id/detail_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    >
+
+  </com.cuantocuesta.android.views.ItemDetail>
+
+</RelativeLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/listing_detail_options_container"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_weight="1"
+  android:background="@color/general_background_color">
+
+  <ImageView
+    android:id="@+id/listing_detail_main_image"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_above="@+id/color_selector_container"
+    tools:src="@drawable/ejemplo" />
+
+  <LinearLayout
+    android:id="@+id/color_selector_container"
+    android:layout_above="@+id/listing_detail_price"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="10dp">
+
+    <View
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginRight="10dp"
+      android:background="#fffbd41c" />
+
+    <View
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:background="#ff59f476" />
+  </LinearLayout>
+
+  <com.cuantocuesta.android.NiceText
+    android:id="@+id/listing_detail_price"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_above="@+id/listing_detail_talle"
+    android:text="$0.00"
+    android:textSize="50sp" />
+
+  <com.cuantocuesta.android.NiceText
+    android:id="@+id/listing_detail_talle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:text="Talles S M X XL XXL"
+    android:textSize="20sp" />
+
+  <ImageView
+    android:id="@+id/listing_detail_button_back"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toLeftOf="@id/listing_detail_talle"
+    android:layout_below="@id/color_selector_container"
+    android:padding="8dp"
+    android:src="@drawable/button_back"/>
+
+  <ImageView
+    android:id="@+id/listing_detail_button_carrito"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:layout_toRightOf="@id/listing_detail_talle"
+    android:layout_below="@id/color_selector_container"
+    android:src="@drawable/button_carrito"/>
+</RelativeLayout>

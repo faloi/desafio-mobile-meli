@@ -119,14 +119,19 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
       callIntent(listing.getPermalink());
     }
 
-    private void openMeliApp() {
-      callIntent(String.format("meli://item?id=%s", listing.getId()));
-    }
+  }
 
-    private void callIntent(String intentUri) {
-      Intent intent = new Intent(Intent.ACTION_VIEW);
-      intent.setData(Uri.parse(intentUri));
-      context.startActivity(intent);
-    }
+  public Listing getListing() {
+    return listing;
+  }
+
+  private void callIntent(String intentUri) {
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setData(Uri.parse(intentUri));
+    this.getContext().startActivity(intent);
+  }
+
+  public void openMeliApp() {
+    callIntent(String.format("meli://item?id=%s", listing.getId()));
   }
 }

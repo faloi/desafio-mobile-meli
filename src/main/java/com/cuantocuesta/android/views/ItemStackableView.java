@@ -13,12 +13,16 @@ import android.widget.RelativeLayout;
 
 import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.ListingsActivity;
+import com.google.common.base.Function;
+
+import java.util.concurrent.Callable;
 
 public class ItemStackableView extends RelativeLayout {
 
   private FrameLayout stack;
   private ListingView current;
   private ListingView next;
+  private Function<ItemStackableView,ItemStackableView> onShowDetail;
 
   public ItemStackableView(Context listingsActivity, AttributeSet attrs) {
     super(listingsActivity, attrs);
@@ -56,6 +60,14 @@ public class ItemStackableView extends RelativeLayout {
         like(v, listingsActivity);
       }
     });
+
+    findViewById(R.id.detail_button).setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View v) {
+        showDetail();
+      }
+    });
   }
 
   public void dislike(View v, ListingsActivity listingsActivity) {
@@ -72,6 +84,10 @@ public class ItemStackableView extends RelativeLayout {
     slideToRight(lastChild);
     stack.removeView(lastChild);
     replaceNext(v, listingsActivity);
+  }
+
+  public void showDetail(){
+    this.onShowDetail.apply(this);
   }
 
   protected void replaceNext(View v, ListingsActivity listingsActivity) {
@@ -127,5 +143,13 @@ public class ItemStackableView extends RelativeLayout {
       stack.addView(getListingView(1, next, listingsActivity.getListingsListView().getAdapter()));
     }
 
+  }
+
+  public void setOnShowDetail(Function<ItemStackableView, ItemStackableView> onShowDetail) {
+    this.onShowDetail = onShowDetail;
+  }
+
+  public ListingView getCurrent() {
+    return current;
   }
 }
