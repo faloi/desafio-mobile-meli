@@ -22,7 +22,7 @@ public interface Meli {
     @Query("limit") int limit
   );
 
-  @GET("/items?attributes=id,pictures,title,price")
+  @GET("/items?attributes=id,pictures,title,price,variations")
   List<Listing> getListingsDetails(@Query("ids") String commaSeparatedIds);
 
   @GET("/categories/{categoryId}/attributes")

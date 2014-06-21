@@ -1,19 +1,18 @@
 package com.cuantocuesta.android.views;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.cuantocuesta.R;
+import com.cuantocuesta.domain.ColorsProvider;
+import com.cuantocuesta.domain.meli.CombinatedColor;
 import com.cuantocuesta.domain.meli.Listing;
 
 import java.text.NumberFormat;
@@ -54,10 +53,12 @@ public class ItemDetail extends RelativeLayout{
   private void updateColors(Listing listing) {
     colorsContainer.removeAllViews();
 
-    //Colores harcodeados para probar
-    colorsContainer.addView(new ItemColor(this.getContext()).color(Color.parseColor("#ff0000"), -1));
-    colorsContainer.addView(new ItemColor(this.getContext()).color(Color.parseColor("#000000"), -1));
-    colorsContainer.addView(new ItemColor(this.getContext()).color(Color.parseColor("#0000ff"), -1));
+    for (CombinatedColor c : listing.getColorsRgbs(ColorsProvider.getInstance().getAvailableColors()))
+      addColorView(c);
+  }
+
+  private void addColorView(CombinatedColor color) {
+    colorsContainer.addView(new ItemColor(this.getContext()).color(color));
   }
 
   public void hide(){

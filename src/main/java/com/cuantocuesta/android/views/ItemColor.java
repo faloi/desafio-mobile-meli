@@ -1,9 +1,11 @@
 package com.cuantocuesta.android.views;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+import com.cuantocuesta.domain.meli.CombinatedColor;
 
 public class ItemColor extends View {
   public ItemColor(Context context) {
@@ -22,8 +24,8 @@ public class ItemColor extends View {
     this.setLayoutParams(params);
   }
 
-  public ItemColor color(int color, int colorSecundario){
-    this.setBackgroundColor(color);
+  public ItemColor color(CombinatedColor color) {
+    this.setBackgroundColor(Color.parseColor(color.getPrimary()));
     return this;
   }
 }
