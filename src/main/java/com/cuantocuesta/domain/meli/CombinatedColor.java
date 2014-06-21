@@ -5,10 +5,12 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import java.util.List;
+import java.util.Set;
 
 public class CombinatedColor {
   private final String primary;
   private final String secondary;
+  private Set<String> pictures;
 
   public CombinatedColor(String primary, String secondary) {
     this.primary = primary;
@@ -24,10 +26,14 @@ public class CombinatedColor {
   }
 
   public CombinatedColor getRgbFrom(List<NamedColor> availableColors) {
-    return new CombinatedColor(
+    CombinatedColor value = new CombinatedColor(
       getRgbFor(availableColors, getPrimary()),
       getRgbFor(availableColors, getSecondary())
     );
+
+    value.setPictures(this.getPictures());
+
+    return value;
   }
 
   private String getRgbFor(List<NamedColor> availableColors, final String color) {
@@ -67,5 +73,13 @@ public class CombinatedColor {
 
   public String getSecondary() {
     return secondary;
+  }
+
+  public Set<String> getPictures() {
+    return pictures;
+  }
+
+  public void setPictures(Set<String> pictures) {
+    this.pictures = pictures;
   }
 }

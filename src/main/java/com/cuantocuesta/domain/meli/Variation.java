@@ -1,24 +1,45 @@
 package com.cuantocuesta.domain.meli;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Variation {
+  public List<String> pictureIds;
   public List<AttributeCombination> attributeCombinations;
 
   public Variation() {
-    this.attributeCombinations = new ArrayList<AttributeCombination>();
+    this(new ArrayList<AttributeCombination>());
   }
 
   public Variation(List<AttributeCombination> attributeCombinations) {
-    this.attributeCombinations = attributeCombinations;
+    this(attributeCombinations, new ArrayList<String>());
   }
 
-  public CombinatedColor getCombinatedColor() {
-    return new CombinatedColor(this.getPrimaryColor(), this.getSecondaryColor());
+  public Variation(List<AttributeCombination> attributeCombinations, List<String> pictureIds) {
+    this.attributeCombinations = attributeCombinations;
+    this.pictureIds = pictureIds;
+  }
+
+  public CombinatedColor getCombinatedColor(Listing listing) {
+    CombinatedColor combinatedColor = new CombinatedColor(this.getPrimaryColor(), this.getSecondaryColor());
+    combinatedColor.setPictures(getPicturesFrom(listing));
+
+    return combinatedColor;
+  }
+
+  private Set<String> getPicturesFrom(final Listing listing) {
+    return ImmutableSet.copyOf(Iterables.transform(getPictureIds(), new Function<String, String>() {
+      @Override
+      public String apply(String input) {
+        return listing.getPictureById(input);
+      }
+    }));
   }
 
   private String getPrimaryColor() {
@@ -52,4 +73,7 @@ public class Variation {
     }).getValueName();
   }
 
+  public List<String> getPictureIds() {
+    return pictureIds;
+  }
 }

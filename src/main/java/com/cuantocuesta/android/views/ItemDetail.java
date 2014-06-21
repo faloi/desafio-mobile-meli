@@ -18,7 +18,7 @@ import com.google.common.base.Joiner;
 
 import java.text.NumberFormat;
 
-public class ItemDetail extends RelativeLayout{
+public class ItemDetail extends RelativeLayout {
   private final ImageView listingImage;
   private final TextView price;
   private final TextView talle;
@@ -26,19 +26,19 @@ public class ItemDetail extends RelativeLayout{
   private final ViewGroup colorsContainer;
 
   public ItemDetail(Context context, AttributeSet attrs) {
-    super( context, attrs);
+    super(context, attrs);
     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     inflater.inflate(R.layout.listing_detail, this, true);
-    listingImage = (ImageView)findViewById(R.id.listing_detail_main_image);
-    price = (TextView)findViewById(R.id.listing_detail_price);
-    talle = (TextView)findViewById(R.id.listing_detail_talle);
-    colorsContainer = (ViewGroup)findViewById(R.id.color_selector_container);
+    listingImage = (ImageView) findViewById(R.id.listing_detail_main_image);
+    price = (TextView) findViewById(R.id.listing_detail_price);
+    talle = (TextView) findViewById(R.id.listing_detail_talle);
+    colorsContainer = (ViewGroup) findViewById(R.id.color_selector_container);
 
     findViewById(R.id.listing_detail_button_carrito).setOnClickListener(new BuyClick());
     findViewById(R.id.listing_detail_button_back).setOnClickListener(new BackClick());
   }
 
-  public void update(ListingView listing){
+  public void update(ListingView listing) {
     listingView = listing;
 
     ImageView view = listing.getImageView(0);
@@ -58,7 +58,7 @@ public class ItemDetail extends RelativeLayout{
   private void updateColors(Listing listing) {
     colorsContainer.removeAllViews();
 
-    for (CombinatedColor c : listing.getColorsRgbs(ColorsProvider.getInstance().getAvailableColors()))
+    for (CombinatedColor c : listing.getColors(ColorsProvider.getInstance().getAvailableColors()))
       addColorView(c);
   }
 
@@ -66,7 +66,7 @@ public class ItemDetail extends RelativeLayout{
     colorsContainer.addView(new ItemColor(this.getContext()).color(color));
   }
 
-  public void hide(){
+  public void hide() {
     Animation animation = AnimationUtils.loadAnimation(this.getContext(), R.anim.go_down);
     animation.setAnimationListener(new Animation.AnimationListener() {
       @Override
@@ -89,7 +89,7 @@ public class ItemDetail extends RelativeLayout{
     this.animate();
   }
 
-  class BackClick implements OnClickListener{
+  class BackClick implements OnClickListener {
 
     @Override
     public void onClick(View v) {
@@ -98,11 +98,11 @@ public class ItemDetail extends RelativeLayout{
     }
   }
 
-  class BuyClick implements OnClickListener{
+  class BuyClick implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-      if(ItemDetail.this.listingView != null){
+      if (ItemDetail.this.listingView != null) {
         ItemDetail.this.listingView.openMeliApp();
       }
     }
