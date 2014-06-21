@@ -1,9 +1,9 @@
 package com.cuantocuesta.android.services;
 
+import com.cuantocuesta.domain.meli.Attribute;
 import com.cuantocuesta.domain.meli.Category;
-import com.cuantocuesta.domain.meli.ResultContainer;
 import com.cuantocuesta.domain.meli.Listing;
-
+import com.cuantocuesta.domain.meli.ResultContainer;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -24,4 +24,7 @@ public interface Meli {
 
   @GET("/items?attributes=id,pictures,title,price")
   List<Listing> getListingsDetails(@Query("ids") String commaSeparatedIds);
+
+  @GET("/categories/{categoryId}/attributes")
+  Attribute.List getAttributesOfCategory(@Path("categoryId") String categoryId);
 }

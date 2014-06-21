@@ -5,9 +5,10 @@ import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.ListingView;
+import com.cuantocuesta.domain.ColorsProvider;
 import com.cuantocuesta.domain.ListingsStream;
-import com.cuantocuesta.domain.meli.ResultContainer;
 import com.cuantocuesta.domain.meli.Listing;
+import com.cuantocuesta.domain.meli.ResultContainer;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 import java.util.Arrays;
@@ -16,6 +17,12 @@ import java.util.List;
 public class ListingsActivity extends ListSpiceActivity<ResultContainer, Meli, Listing> {
 
   protected ListingsStream listingsStream;
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    ColorsProvider.getInstance().loadColors(getSpiceManager(), getString(R.string.meli_clothing_category_example));
+  }
 
   @Override
   protected Class<ResultContainer> getResponseClass() {

@@ -12,8 +12,8 @@ import static org.junit.Assert.assertEquals;
 public class ColorsProviderTest {
 
   @Test
-  public void testGetAndStoreColors() {
-    List<NamedColor> colors = new ColorsProvider("MLA1234").getColorsFromAttributes(Arrays.asList(
+  public void Can_make_colors_list_from_category_attributes() {
+    List<NamedColor> colors = new ColorsProvider().getColorsFromAttributes(Arrays.asList(
       new Attribute("season"),
       new Attribute("color",
         AttributeValue.color("Vermelho", "#FF0000"),

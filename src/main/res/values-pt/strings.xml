@@ -8,11 +8,12 @@
   <string name="drawer_close">Close Drawer</string>
   <string name="loading_please_wait">Carregando anúncios...</string>
   <string name="content_picture">Foto</string>
-    <string name="meli_base_clothing_category">MLB1430</string>
-    <string name="meli_site">MLB</string>
-    <string-array name="menu_options">
-    <item >Home</item>
-    <item >Categorias</item>
-    <item >Anúncios</item>
+  <string name="meli_base_clothing_category">MLB1430</string>
+  <string name="meli_site">MLB</string>
+  <string name="meli_clothing_category_example">MLB28114</string>
+  <string-array name="menu_options">
+    <item>Home</item>
+    <item>Categorias</item>
+    <item>Anúncios</item>
   </string-array>
 </resources>

@@ -1,11 +1,11 @@
 package com.cuantocuesta.domain.meli;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Attribute {
   public String type;
-  public List<AttributeValue> values;
+  public java.util.List<AttributeValue> values;
 
   public Attribute(String type) {
     this.type = type;
@@ -17,14 +17,17 @@ public class Attribute {
   }
 
   public boolean isColor() {
-    return this.getType() == "color";
+    return this.getType() != null && this.getType().equals("color");
   }
 
   public String getType() {
     return type;
   }
 
-  public List<AttributeValue> getValues() {
+  public java.util.List<AttributeValue> getValues() {
     return values;
+  }
+
+  public static class List extends ArrayList<Attribute> {
   }
 }
