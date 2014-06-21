@@ -1,9 +1,11 @@
 package com.cuantocuesta.android.views;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
@@ -12,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cuantocuesta.R;
+import com.cuantocuesta.domain.meli.Listing;
 
 import java.text.NumberFormat;
 
@@ -19,6 +22,7 @@ public class ItemDetail extends RelativeLayout{
   private final ImageView listingImage;
   private final TextView price;
   private ListingView listingView;
+  private final ViewGroup colorsContainer;
 
   public ItemDetail(Context context, AttributeSet attrs) {
     super( context, attrs);
@@ -26,6 +30,7 @@ public class ItemDetail extends RelativeLayout{
     inflater.inflate(R.layout.listing_detail, this, true);
     listingImage = (ImageView)findViewById(R.id.listing_detail_main_image);
     price = (TextView)findViewById(R.id.listing_detail_price);
+    colorsContainer = (ViewGroup)findViewById(R.id.color_selector_container);
 
     findViewById(R.id.listing_detail_button_carrito).setOnClickListener(new BuyClick());
     findViewById(R.id.listing_detail_button_back).setOnClickListener(new BackClick());
@@ -38,12 +43,21 @@ public class ItemDetail extends RelativeLayout{
     listingImage.setImageDrawable(view.getDrawable());
 
     price.setText(NumberFormat.getCurrencyInstance().format(listing.getListing().getPrice()));
-
+    this.updateColors(listing.getListing());
     this.setAnimation(AnimationUtils.loadAnimation(this.getContext(), R.anim.go_up));
 
     ItemDetail.this.setVisibility(VISIBLE);
     this.animate();
 
+  }
+
+  private void updateColors(Listing listing) {
+    colorsContainer.removeAllViews();
+
+    //Colores harcodeados para probar
+    colorsContainer.addView(new ItemColor(this.getContext()).color(Color.parseColor("#ff0000"), -1));
+    colorsContainer.addView(new ItemColor(this.getContext()).color(Color.parseColor("#000000"), -1));
+    colorsContainer.addView(new ItemColor(this.getContext()).color(Color.parseColor("#0000ff"), -1));
   }
 
   public void hide(){
