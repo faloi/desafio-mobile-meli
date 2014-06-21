@@ -14,8 +14,8 @@ import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
 
 import java.util.List;
 
-public class MainContentFragment  extends ListingsActivity {
-  public static final String ARG_OS= "OS";
+public class MainContentFragment extends ListingsActivity {
+  public static final String ARG_OS = "OS";
   private ItemStackableView stackableView;
   private ItemDetail detailView;
 
@@ -29,27 +29,8 @@ public class MainContentFragment  extends ListingsActivity {
     stackableView.setOnShowDetail(new Function<ItemStackableView, ItemStackableView>() {
       @Override
       public ItemStackableView apply(final ItemStackableView input) {
-        if(input.getCurrent() == null) return input;
-
-        final Listing listingWithoutVariations = input.getCurrent().getListing();
-
-        getSpiceManager().execute(new RetrofitSpiceRequest<Listing, Meli>(Listing.class, Meli.class) {
-          @Override
-          public Listing loadDataFromNetwork() throws Exception {
-            return getService().getVariations(listingWithoutVariations.getId());
-          }
-        }, new RequestListener<Listing>() {
-          @Override
-          public void onRequestFailure(SpiceException spiceException) {
-
-          }
-
-          @Override
-          public void onRequestSuccess(Listing listing) {
-            listingWithoutVariations.addVariations(listing.getVariations());
-            detailView.update(input.getCurrent());
-          }
-        });
+        if (input.getCurrent() != null)
+          loadAndShowDetails(input);
 
         return input;
       }
@@ -67,5 +48,25 @@ public class MainContentFragment  extends ListingsActivity {
     return R.layout.home_fragment;
   }
 
+  private void loadAndShowDetails(final ItemStackableView input) {
+    final Listing listingWithoutVariations = input.getCurrent().getListing();
 
+    getSpiceManager().execute(new RetrofitSpiceRequest<Listing, Meli>(Listing.class, Meli.class) {
+      @Override
+      public Listing loadDataFromNetwork() throws Exception {
+        return getService().getVariations(listingWithoutVariations.getId());
+      }
+    }, new RequestListener<Listing>() {
+      @Override
+      public void onRequestFailure(SpiceException spiceException) {
+
+      }
+
+      @Override
+      public void onRequestSuccess(Listing listing) {
+        listingWithoutVariations.addVariations(listing.getVariations());
+        detailView.update(input.getCurrent());
+      }
+    });
+  }
 }
