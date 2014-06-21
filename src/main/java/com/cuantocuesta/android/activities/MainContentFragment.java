@@ -3,6 +3,8 @@ package com.cuantocuesta.android.activities;
 import android.os.Bundle;
 import android.view.View;
 import com.cuantocuesta.R;
+import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
+import com.cuantocuesta.android.applicationModels.Displayable;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.ItemDetail;
 import com.cuantocuesta.android.views.ItemStackableView;
@@ -14,8 +16,8 @@ import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
 
 import java.util.List;
 
-public class MainContentFragment extends ListingsActivity {
-  public static final String ARG_OS = "OS";
+public abstract class MainContentFragment<TResponse, TService, TModel extends Displayable>  extends ListSpiceActivity<TResponse, TService, TModel> {
+  public static final String ARG_OS= "OS";
   private ItemStackableView stackableView;
   private ItemDetail detailView;
 
@@ -24,49 +26,18 @@ public class MainContentFragment extends ListingsActivity {
     super.onCreateFrame(savedInstanceState, view);
     stackableView = (ItemStackableView) findViewById(R.id.stackable_view);
     detailView = (ItemDetail) findViewById(R.id.detail_view);
-
-    stackableView.build(this);
-    stackableView.setOnShowDetail(new Function<ItemStackableView, ItemStackableView>() {
-      @Override
-      public ItemStackableView apply(final ItemStackableView input) {
-        if (input.getCurrent() != null)
-          loadAndShowDetails(input);
-
-        return input;
-      }
-    });
-  }
-
-  @Override
-  protected void updateListViewContent(List<Listing> items) {
-    super.updateListViewContent(items);
-    stackableView.populateIfEmpty(this);
   }
 
   @Override
   protected int layoutId() {
     return R.layout.home_fragment;
   }
+  
+  public ItemStackableView getStackableView() {
+    return stackableView;
+  }
 
-  private void loadAndShowDetails(final ItemStackableView input) {
-    final Listing listingWithoutVariations = input.getCurrent().getListing();
-
-    getSpiceManager().execute(new RetrofitSpiceRequest<Listing, Meli>(Listing.class, Meli.class) {
-      @Override
-      public Listing loadDataFromNetwork() throws Exception {
-        return getService().getVariations(listingWithoutVariations.getId());
-      }
-    }, new RequestListener<Listing>() {
-      @Override
-      public void onRequestFailure(SpiceException spiceException) {
-
-      }
-
-      @Override
-      public void onRequestSuccess(Listing listing) {
-        listingWithoutVariations.addVariations(listing.getVariations());
-        detailView.update(input.getCurrent());
-      }
-    });
+  public ItemDetail getDetailView() {
+    return detailView;
   }
 }

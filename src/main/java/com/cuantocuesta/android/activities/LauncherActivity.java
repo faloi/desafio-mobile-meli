@@ -143,7 +143,7 @@ public class LauncherActivity extends ActionBarActivity {
         fragment = new ListingsActivity();
         break;
       default:
-        fragment = new MainContentFragment();
+        fragment = new ListingsActivity();
     }
 
     // create a new fragment and specify the planet to show based on position
