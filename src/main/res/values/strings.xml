@@ -17,8 +17,9 @@
   <string name="navigation_drawer_close">Cerrar</string>
   <string name="talle">Talles %1$s</string>
   <string-array name="menu_options">
-    <item>Home</item>
+    <item>Género</item>
     <item>Categorías</item>
-    <item>Listing</item>
+    <item>Productos</item>
+    <item>Comprar</item>
   </string-array>
 </resources>

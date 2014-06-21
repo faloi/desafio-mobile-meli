@@ -16,12 +16,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.cuantocuesta.R;
+import com.cuantocuesta.android.activities.templates.CustomFragment;
 
 public class LauncherActivity extends ActionBarActivity {
   private DrawerLayout mDrawerLayout;
   private ListView mDrawerList;
   private ActionBarDrawerToggle mDrawerToggle;
   private FragmentManager fragmentManager;
+  private CustomFragment fragment;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -114,7 +116,7 @@ public class LauncherActivity extends ActionBarActivity {
     super.onPostCreate(savedInstanceState);
     mDrawerToggle.syncState();
 
-    selectItem(MAIN_SECTION);
+    selectItem(GENERO_SECTION);
   }
 
   @Override
@@ -127,15 +129,16 @@ public class LauncherActivity extends ActionBarActivity {
    * Swaps fragments in the main content view
    */
 
-  private static final int MAIN_SECTION = 0;
+  private static final int GENERO_SECTION = 0;
   private static final int CATEGORIES_SECTION = 1;
   private static final int LISTINGS_SECTION = 2;
 
   private void selectItem(int position) {
 
-    Fragment fragment;
-
     switch (position){
+      case GENERO_SECTION:
+        fragment = new GeneroActivity();
+        break;
       case CATEGORIES_SECTION:
         fragment = new CategoriesActivity();
         break;
@@ -160,5 +163,10 @@ public class LauncherActivity extends ActionBarActivity {
     mDrawerLayout.closeDrawer(mDrawerList);
   }
 
-
+  @Override
+  public void onBackPressed() {
+    if(this.fragment != null && !this.fragment.onBackPressed()){
+      super.onBackPressed();
+    }
+  }
 }

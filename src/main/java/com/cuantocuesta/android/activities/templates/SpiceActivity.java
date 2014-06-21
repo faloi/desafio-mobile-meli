@@ -10,7 +10,7 @@ import com.cuantocuesta.android.services.MeliService;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.spicelist.okhttp.OkHttpBitmapSpiceManager;
 
-public abstract class SpiceActivity extends Fragment {
+public abstract class SpiceActivity extends CustomFragment {
   private SpiceManager spiceManager = new SpiceManager(MeliService.class);
   private OkHttpBitmapSpiceManager spiceManagerBinary = new OkHttpBitmapSpiceManager();
   private View thisView;

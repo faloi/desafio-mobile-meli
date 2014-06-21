@@ -16,7 +16,7 @@ import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
 
 import java.util.List;
 
-public abstract class MainContentFragment<TResponse, TService, TModel extends Displayable>  extends ListSpiceActivity<TResponse, TService, TModel> {
+public abstract class MainContentFragment<TResponse, TService, TModel extends Displayable>  extends ListSpiceActivity<TResponse, TService, TModel> implements CanHandleBackButton {
   public static final String ARG_OS= "OS";
   private ItemStackableView stackableView;
   private ItemDetail detailView;
@@ -39,5 +39,14 @@ public abstract class MainContentFragment<TResponse, TService, TModel extends Di
 
   public ItemDetail getDetailView() {
     return detailView;
+  }
+
+  public boolean onBackPressed(){
+    boolean shouldPropagate = false;
+    if(detailView.getVisibility() == View.VISIBLE){
+      detailView.hide();
+      shouldPropagate = true;
+    }
+    return shouldPropagate;
   }
 }
