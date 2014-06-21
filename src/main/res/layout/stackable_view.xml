@@ -43,7 +43,7 @@
       android:id="@+id/detail_button"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:src="@drawable/detail_button"
+      android:src="@drawable/button_detail"
       android:padding="12dp"
       android:layout_weight="1"/>
 
