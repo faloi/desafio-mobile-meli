@@ -9,6 +9,7 @@ import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
 import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.ItemDetail;
 import com.cuantocuesta.android.views.ItemStackableView;
+import com.cuantocuesta.android.views.LikeableView;
 import com.cuantocuesta.android.views.ListingView;
 import com.cuantocuesta.domain.ColorsProvider;
 import com.cuantocuesta.domain.ListingsStream;
@@ -23,7 +24,7 @@ import com.octo.android.robospice.spicelist.SpiceListItemView;
 import java.util.Arrays;
 import java.util.List;
 
-public class ListingsActivity extends MainContentFragment<ResultContainer, Meli, Listing> {
+public class ListingsActivity extends MainContentFragment<ResultContainer, Meli, Listing> implements DisplayableQueue {
 
   protected ListingsStream listingsStream;
 
@@ -32,9 +33,9 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
     super.onCreateFrame(savedInstanceState, view);
 
     getStackableView().build(this);
-    getStackableView().setOnShowDetail(new Function<ItemStackableView, ItemStackableView>() {
+    getStackableView().setOnShowDetail(new Function<ItemStackableView<Listing>, ItemStackableView<Listing>>() {
       @Override
-      public ItemStackableView apply(final ItemStackableView input) {
+      public ItemStackableView<Listing> apply(final ItemStackableView<Listing> input) {
         if (input.getCurrent() != null)
           loadAndShowDetails(input);
 
@@ -44,8 +45,8 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
 
   }
 
-  private void loadAndShowDetails(final ItemStackableView input) {
-    final Listing listingWithoutVariations = input.getCurrent().getListing();
+  private void loadAndShowDetails(final ItemStackableView<Listing> input) {
+    final Listing listingWithoutVariations = input.getCurrent().getItem();
 
     getSpiceManager().execute(new RetrofitSpiceRequest<Listing, Meli>(Listing.class, Meli.class) {
       @Override
@@ -113,7 +114,7 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
     return listingsStream;
   }
 
-  public ListingView pop(){
+  public LikeableView<Listing> pop(){
     if(getListingsListView().getAdapter().getCount() == 0) return null;
     ListingView listingView = new ListingView(this.getActivity(), getListingsStream(), this);
     getListingsListView().getAdapter().getView(0, listingView, null);

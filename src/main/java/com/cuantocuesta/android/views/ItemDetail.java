@@ -22,7 +22,7 @@ public class ItemDetail extends RelativeLayout {
   private final ImageView listingImage;
   private final TextView price;
   private final TextView talle;
-  private ListingView listingView;
+  private LikeableView<Listing> listingView;
   private final ViewGroup colorsContainer;
 
   public ItemDetail(Context context, AttributeSet attrs) {
@@ -38,18 +38,18 @@ public class ItemDetail extends RelativeLayout {
     findViewById(R.id.listing_detail_button_back).setOnClickListener(new BackClick());
   }
 
-  public void update(ListingView listing) {
+  public void update(LikeableView<Listing> listing) {
     listingView = listing;
 
-    ImageView view = listing.getImageView(0);
+    ImageView view = listing.getImageView();
     listingImage.setImageDrawable(view.getDrawable());
 
-    price.setText(NumberFormat.getCurrencyInstance().format(listing.getListing().getPrice()));
-    this.updateColors(listing.getListing());
+    price.setText(NumberFormat.getCurrencyInstance().format(listing.getItem().getPrice()));
+    this.updateColors(listing.getItem());
     this.setAnimation(AnimationUtils.loadAnimation(this.getContext(), R.anim.go_up));
 
     Joiner joiner = Joiner.on(" ").skipNulls();
-    talle.setText(getContext().getString(R.string.talle, joiner.join(listing.getListing().getSizes())));
+    talle.setText(getContext().getString(R.string.talle, joiner.join(listing.getItem().getSizes())));
 
     this.show();
   }
@@ -107,7 +107,7 @@ public class ItemDetail extends RelativeLayout {
     @Override
     public void onClick(View v) {
       if (ItemDetail.this.listingView != null) {
-        ItemDetail.this.listingView.openMeliApp();
+        ItemDetail.this.listingView.getItem().openMeliApp(v.getContext());
       }
     }
   }

@@ -12,10 +12,10 @@ import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.ListingsActivity;
 import com.google.common.base.Function;
 
-public class ItemStackableView extends RelativeLayout {
+public class ItemStackableView<T> extends RelativeLayout {
 
   private FrameLayout stack;
-  private ListingView current;
+  private LikeableView current;
   private Function<ItemStackableView,ItemStackableView> onShowDetail;
 
   public ItemStackableView(Context listingsActivity, AttributeSet attrs) {
@@ -92,7 +92,7 @@ public class ItemStackableView extends RelativeLayout {
   private void populateCurrent(ListingsActivity listingsActivity) {
     current = listingsActivity.pop();
     if(current != null){
-      stack.addView(current.getImageView(), 0);
+      stack.addView(current.getImageViewAndRemoveFromParent(), 0);
     }
   }
 
@@ -106,7 +106,7 @@ public class ItemStackableView extends RelativeLayout {
     this.onShowDetail = onShowDetail;
   }
 
-  public ListingView getCurrent() {
+  public LikeableView<T> getCurrent() {
     return current;
   }
 

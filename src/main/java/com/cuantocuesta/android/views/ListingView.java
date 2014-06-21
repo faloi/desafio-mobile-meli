@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +20,17 @@ import com.cuantocuesta.domain.meli.Listing;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 
-public class ListingView extends RelativeLayout implements SpiceListItemView<Listing> {
+public class ListingView extends RelativeLayout implements SpiceListItemView<Listing> , LikeableView<Listing> {
   private TextView titleTextView;
   private TextView priceTextView;
   private ImageView thumbImageView;
   private Listing listing;
   private ListingsStream listingsStream;
   private ListingsActivity parent;
+
+  public ListingView(Context context, AttributeSet attrs) {
+    super(context, attrs);
+  }
 
   public ListingView(Context context, ListingsStream listingsStream, ListingsActivity parent) {
     super(context);
@@ -111,34 +116,29 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
     @Override
     public void onClick(View view) {
       try {
-        openMeliApp();
+        listing.openMeliApp(view.getContext());
       } catch (ActivityNotFoundException e) {
         openBrowser();
       }
     }
 
     private void openBrowser() {
-      callIntent(listing.getPermalink());
+      listing.callIntent(ListingView.this.getContext(), listing.getPermalink());
     }
 
   }
 
-  public Listing getListing() {
+  public Listing getItem() {
     return listing;
   }
 
-  private void callIntent(String intentUri) {
-    Intent intent = new Intent(Intent.ACTION_VIEW);
-    intent.setData(Uri.parse(intentUri));
-    this.getContext().startActivity(intent);
+  public ImageView getImageView(){
+    return this.getImageView(0);
   }
-
-  public void openMeliApp() {
-    callIntent(String.format("meli://item?id=%s", listing.getId()));
-  }
-
-  public ImageView getImageView() {
+  public ImageView getImageViewAndRemoveFromParent() {
     ImageView imageView = this.getImageView(0);
+    if(imageView == null) return null;
+
     ((ViewGroup)imageView.getParent()).removeView(imageView);
     imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);

@@ -1,5 +1,9 @@
 package com.cuantocuesta.domain.meli;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
 import com.cuantocuesta.android.applicationModels.Displayable;
 import com.cuantocuesta.domain.NamedColor;
 import com.google.common.base.Function;
@@ -129,5 +133,16 @@ public class Listing implements Displayable {
       }
     }).getUrl();
   }
+
+  public void callIntent(Context context, String intentUri) {
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setData(Uri.parse(intentUri));
+    context.startActivity(intent);
+  }
+
+  public void openMeliApp(Context context) {
+    callIntent(context, String.format("meli://item?id=%s", this.getId()));
+  }
+
 }
 
