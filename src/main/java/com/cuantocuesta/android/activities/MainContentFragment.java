@@ -29,6 +29,8 @@ public class MainContentFragment  extends ListingsActivity {
     stackableView.setOnShowDetail(new Function<ItemStackableView, ItemStackableView>() {
       @Override
       public ItemStackableView apply(final ItemStackableView input) {
+        if(input.getCurrent() == null) return input;
+
         final Listing listingWithoutVariations = input.getCurrent().getListing();
 
         getSpiceManager().execute(new RetrofitSpiceRequest<Listing, Meli>(Listing.class, Meli.class) {
@@ -57,7 +59,7 @@ public class MainContentFragment  extends ListingsActivity {
   @Override
   protected void updateListViewContent(List<Listing> items) {
     super.updateListViewContent(items);
-    stackableView.populate(this);
+    stackableView.populateIfEmpty(this);
   }
 
   @Override

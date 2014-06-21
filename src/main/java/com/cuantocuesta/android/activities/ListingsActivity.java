@@ -64,4 +64,11 @@ public class ListingsActivity extends ListSpiceActivity<ResultContainer, Meli, L
   public ListingsStream getListingsStream() {
     return listingsStream;
   }
+
+  public ListingView pop(){
+    if(getListingsListView().getAdapter().getCount() == 0) return null;
+    ListingView listingView = new ListingView(this.getActivity(), getListingsStream(), this);
+    getListingsListView().getAdapter().getView(0, listingView, null);
+    return listingView;
+  }
 }

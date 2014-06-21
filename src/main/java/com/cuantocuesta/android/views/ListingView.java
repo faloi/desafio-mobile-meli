@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.cuantocuesta.R;
@@ -133,5 +135,13 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
 
   public void openMeliApp() {
     callIntent(String.format("meli://item?id=%s", listing.getId()));
+  }
+
+  public ImageView getImageView() {
+    ImageView imageView = this.getImageView(0);
+    ((ViewGroup)imageView.getParent()).removeView(imageView);
+    imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+    imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+    return imageView;
   }
 }
