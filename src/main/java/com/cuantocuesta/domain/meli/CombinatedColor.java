@@ -8,24 +8,35 @@ import java.util.List;
 
 public class CombinatedColor {
   private final String primary;
-  private final String secondaryColor;
+  private final String secondary;
 
-  public CombinatedColor(String primary, String secondaryColor) {
+  public CombinatedColor(String primary, String secondary) {
     this.primary = primary;
-    this.secondaryColor = secondaryColor;
+    this.secondary = secondary;
+  }
+
+  public CombinatedColor(String primary) {
+    this(primary, null);
   }
 
   public String getPrimary() {
     return primary;
   }
 
-  public String getRgbFrom(List<NamedColor> availableColors) {
-    return Iterables.find(availableColors, new Predicate<NamedColor>() {
+  public CombinatedColor getRgbFrom(List<NamedColor> availableColors) {
+    return new CombinatedColor(
+      getRgbFor(availableColors, getPrimary()),
+      getRgbFor(availableColors, getSecondary())
+    );
+  }
+
+  private String getRgbFor(List<NamedColor> availableColors, final String color) {
+    return Iterables.tryFind(availableColors, new Predicate<NamedColor>() {
       @Override
       public boolean apply(NamedColor input) {
-        return input.getName().equals(getPrimary());
+        return input.getName().equals(color);
       }
-    }).getRgb();
+    }).or(new NamedColor("", null)).getRgb();
   }
 
   @Override
@@ -36,16 +47,25 @@ public class CombinatedColor {
     CombinatedColor that = (CombinatedColor) o;
 
     if (!primary.equals(that.primary)) return false;
-    if (secondaryColor != null ? !secondaryColor.equals(that.secondaryColor) : that.secondaryColor != null)
+    if (secondary != null ? !secondary.equals(that.secondary) : that.secondary != null)
       return false;
 
     return true;
   }
 
   @Override
+  public String toString() {
+    return primary + " - " + secondary;
+  }
+
+  @Override
   public int hashCode() {
     int result = primary.hashCode();
-    result = 31 * result + (secondaryColor != null ? secondaryColor.hashCode() : 0);
+    result = 31 * result + (secondary != null ? secondary.hashCode() : 0);
     return result;
+  }
+
+  public String getSecondary() {
+    return secondary;
   }
 }

@@ -81,7 +81,7 @@ public class Listing implements Displayable {
     return variations;
   }
 
-  public List<String> getColorsRgbs(final List<NamedColor> availableColors) {
+  public List<CombinatedColor> getColorsRgbs(final List<NamedColor> availableColors) {
     Iterable<CombinatedColor> colors = Iterables.transform(getVariations(), new Function<Variation, CombinatedColor>() {
       @Override
       public CombinatedColor apply(Variation input) {
@@ -89,9 +89,9 @@ public class Listing implements Displayable {
       }
     });
 
-    return Lists.newArrayList(Iterables.transform(Sets.newHashSet(colors), new Function<CombinatedColor, String>() {
+    return Lists.newArrayList(Iterables.transform(Sets.newHashSet(colors), new Function<CombinatedColor, CombinatedColor>() {
       @Override
-      public String apply(final CombinatedColor color) {
+      public CombinatedColor apply(final CombinatedColor color) {
         return color.getRgbFrom(availableColors);
       }
     }));

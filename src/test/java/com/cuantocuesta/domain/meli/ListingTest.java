@@ -63,7 +63,39 @@ public class ListingTest {
     );
 
     assertEquals(
-      Arrays.asList("#FF0000", "#000000"),
+      Arrays.asList(new CombinatedColor("#FF0000"), new CombinatedColor("#000000")),
+      listing.getColorsRgbs(Arrays.asList(
+        new NamedColor("Preto", "#000000"), new NamedColor("Vermelho", "#FF0000"), new NamedColor("Rosa", "#F4CCCC")
+      ))
+    );
+  }
+
+  @Test
+  public void Can_calculate_the_colors_of_its_variations_when_there_are_primary_and_secondary_colors() {
+    listing.addVariations(
+      new Variation(Arrays.asList(
+        new AttributeCombination("Cor principal", "Preto"),
+        new AttributeCombination("Cor Secundária", "Vermelho"),
+        new AttributeCombination("Tamanho", "35")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Cor principal", "Preto"),
+        new AttributeCombination("Cor Secundária", "Vermelho"),
+        new AttributeCombination("Tamanho", "36")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Cor principal", "Preto"),
+        new AttributeCombination("Tamanho", "36")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Cor principal", "Vermelho"),
+        new AttributeCombination("Cor Secundária", "Rosa"),
+        new AttributeCombination("Tamanho", "35")
+      ))
+    );
+
+    assertEquals(
+      Arrays.asList(new CombinatedColor("#FF0000", "#F4CCCC"), new CombinatedColor("#000000"), new CombinatedColor("#000000", "#FF0000")),
       listing.getColorsRgbs(Arrays.asList(
         new NamedColor("Preto", "#000000"), new NamedColor("Vermelho", "#FF0000"), new NamedColor("Rosa", "#F4CCCC")
       ))
