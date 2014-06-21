@@ -43,7 +43,7 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_above="@+id/listing_detail_talle"
-    android:text="$0.00"
+    tools:text="$0.00"
     android:textSize="50sp" />
 
   <com.cuantocuesta.android.NiceText
@@ -53,7 +53,7 @@
     android:layout_marginBottom="20dp"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
-    android:text="Talles S M X XL XXL"
+    tools:text="Talles S M X XL XXL"
     android:textSize="20sp" />
 
   <ImageView

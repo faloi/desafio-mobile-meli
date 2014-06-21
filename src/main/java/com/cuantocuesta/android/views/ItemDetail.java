@@ -14,12 +14,14 @@ import com.cuantocuesta.R;
 import com.cuantocuesta.domain.ColorsProvider;
 import com.cuantocuesta.domain.meli.CombinatedColor;
 import com.cuantocuesta.domain.meli.Listing;
+import com.google.common.base.Joiner;
 
 import java.text.NumberFormat;
 
 public class ItemDetail extends RelativeLayout{
   private final ImageView listingImage;
   private final TextView price;
+  private final TextView talle;
   private ListingView listingView;
   private final ViewGroup colorsContainer;
 
@@ -29,6 +31,7 @@ public class ItemDetail extends RelativeLayout{
     inflater.inflate(R.layout.listing_detail, this, true);
     listingImage = (ImageView)findViewById(R.id.listing_detail_main_image);
     price = (TextView)findViewById(R.id.listing_detail_price);
+    talle = (TextView)findViewById(R.id.listing_detail_talle);
     colorsContainer = (ViewGroup)findViewById(R.id.color_selector_container);
 
     findViewById(R.id.listing_detail_button_carrito).setOnClickListener(new BuyClick());
@@ -45,6 +48,8 @@ public class ItemDetail extends RelativeLayout{
     this.updateColors(listing.getListing());
     this.setAnimation(AnimationUtils.loadAnimation(this.getContext(), R.anim.go_up));
 
+    Joiner joiner = Joiner.on(" ").skipNulls();
+    talle.setText(getContext().getString(R.string.talle, joiner.join(listing.getListing().getSizes())));
     ItemDetail.this.setVisibility(VISIBLE);
     this.animate();
 

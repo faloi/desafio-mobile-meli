@@ -15,8 +15,9 @@
   <string name="listing_like">Me gusta</string>
   <string name="navigation_drawer_open">Abrir</string>
   <string name="navigation_drawer_close">Cerrar</string>
+  <string name="talle">Talles %1$s</string>
   <string-array name="menu_options">
-  <item>Home</item>
+    <item>Home</item>
     <item>Categorías</item>
     <item>Listing</item>
   </string-array>
