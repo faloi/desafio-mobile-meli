@@ -7,10 +7,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class Listing implements Displayable {
   public String id;
@@ -99,6 +96,15 @@ public class Listing implements Displayable {
 
   public void addVariations(Collection<Variation> variations) {
     this.getVariations().addAll(variations);
+  }
+
+  public Set<String> getSizes() {
+    return Sets.newHashSet(Iterables.transform(getVariations(), new Function<Variation, String>() {
+      @Override
+      public String apply(Variation input) {
+        return input.getSize();
+      }
+    }));
   }
 }
 

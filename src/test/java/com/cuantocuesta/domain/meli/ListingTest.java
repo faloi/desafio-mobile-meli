@@ -1,6 +1,7 @@
 package com.cuantocuesta.domain.meli;
 
 import com.cuantocuesta.domain.NamedColor;
+import com.google.common.collect.Sets;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -99,6 +100,33 @@ public class ListingTest {
       listing.getColorsRgbs(Arrays.asList(
         new NamedColor("Preto", "#000000"), new NamedColor("Vermelho", "#FF0000"), new NamedColor("Rosa", "#F4CCCC")
       ))
+    );
+  }
+
+  @Test
+  public void Can_calculate_the_sizes_of_its_variations() {
+    listing.addVariations(
+      new Variation(Arrays.asList(
+        new AttributeCombination("Cor principal", "Preto"),
+        new AttributeCombination("Tamanho", "35")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Cor principal", "Vermelho"),
+        new AttributeCombination("Tamanho", "35")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Cor principal", "Preto"),
+        new AttributeCombination("Tamanho", "36")
+      )),
+      new Variation(Arrays.asList(
+        new AttributeCombination("Cor principal", "Vermelho"),
+        new AttributeCombination("Tamanho", "36")
+      ))
+    );
+
+    assertEquals(
+      Sets.newHashSet("35", "36"),
+      listing.getSizes()
     );
   }
 }

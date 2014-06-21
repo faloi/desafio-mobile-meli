@@ -11,4 +11,12 @@ public class AttributeCombination {
     this.name = name;
     this.valueName = valueName;
   }
+
+  public String getValueName() {
+    return valueName;
+  }
+
+  String getNormalizedName() {
+    return name.toLowerCase();
+  }
 }

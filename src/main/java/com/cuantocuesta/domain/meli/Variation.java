@@ -33,13 +33,23 @@ public class Variation {
     return Iterables.tryFind(getAttributeCombinations(), new Predicate<AttributeCombination>() {
       @Override
       public boolean apply(AttributeCombination input) {
-        String normalizedName = input.name.toLowerCase();
+        String normalizedName = input.getNormalizedName();
         return normalizedName.contains("co") && normalizedName.contains(nameToSearch);
       }
-    }).or(new AttributeCombination("", null)).valueName;
+    }).or(new AttributeCombination("", null)).getValueName();
   }
 
   public List<AttributeCombination> getAttributeCombinations() {
     return attributeCombinations;
   }
+
+  public String getSize() {
+    return Iterables.find(getAttributeCombinations(), new Predicate<AttributeCombination>() {
+      @Override
+      public boolean apply(AttributeCombination input) {
+        return input.getNormalizedName().startsWith("ta");
+      }
+    }).getValueName();
+  }
+
 }
