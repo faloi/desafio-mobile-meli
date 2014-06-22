@@ -133,7 +133,7 @@ public class LauncherActivity extends ActionBarActivity {
 
     private void selectItem(int position) {
 
-        switch (position) {
+      switch (position) {
             case CATEGORIES_SECTION:
                 fragment = new CategoriesActivity();
                 break;

@@ -1,16 +1,12 @@
 package com.cuantocuesta.android.views;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.cuantocuesta.R;
@@ -103,28 +99,6 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
     parent.removeItem(this.listing);
   }
 
-  private class OpenMeliListing implements OnClickListener {
-    private final Context context;
-
-    public OpenMeliListing(Context context) {
-      this.context = context;
-    }
-
-    @Override
-    public void onClick(View view) {
-      try {
-        listing.openMeliApp(view.getContext());
-      } catch (ActivityNotFoundException e) {
-        openBrowser();
-      }
-    }
-
-    private void openBrowser() {
-      listing.callIntent(ListingView.this.getContext(), listing.getPermalink());
-    }
-
-  }
-
   public Listing getItem() {
     return listing;
   }
@@ -142,3 +116,4 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
     return imageView;
   }
 }
+
