@@ -4,6 +4,7 @@ import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.domain.meli.Listing;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
@@ -12,6 +13,7 @@ import java.util.*;
 
 public class ListingsStream {
   public static final int LIMIT = 10;
+  public static final int DISLIKE_FACTOR = 2;
 
   private Meli service;
   private String site;
@@ -19,6 +21,7 @@ public class ListingsStream {
   private List<Listing> likedListings = new ArrayList<Listing>();
   private List<Listing> dislikedListings = new ArrayList<Listing>();
   private Map<String, Integer> offsets = new HashMap<String, Integer>();
+  private Map<String, Integer> dislikedCategories = new HashMap<String, Integer>();
 
   public ListingsStream(Meli service, String site, List<String> relevantCategories) {
     this.service = service;
@@ -42,9 +45,23 @@ public class ListingsStream {
       }
     });
 
-    Iterable<Listing> listings = Iterables.concat(examples);
+    Iterable<Listing> listings = Iterables.filter(Iterables.concat(examples), new Predicate<Listing>() {
+      @Override
+      public boolean apply(Listing input) {
+        return !isCategoryDisliked(input);
+      }
+    });
 
     return randomize(fetchAdditionalData(listings));
+  }
+
+  private boolean isCategoryDisliked(Listing listing) {
+    return this.getDislikedCategoryCount(listing) >= DISLIKE_FACTOR;
+  }
+
+  private int getDislikedCategoryCount(Listing listing) {
+    Integer value = this.dislikedCategories.get(listing.getCategoryId());
+    return value == null ? 0 : value;
   }
 
   private List<Listing> fetchAdditionalData(Iterable<Listing> listings) {
@@ -64,6 +81,16 @@ public class ListingsStream {
 
   public void registerDislike(Listing listing) {
     this.dislikedListings.add(listing);
+    this.addDislikedCategory(listing.getCategoryId());
+  }
+
+  private void addDislikedCategory(String categoryId) {
+    Integer actualCount = this.dislikedCategories.get(categoryId);
+
+    if (actualCount == null)
+      this.dislikedCategories.put(categoryId, 0);
+    else
+      this.dislikedCategories.put(categoryId, actualCount + 1);
   }
 
   private List<Listing> randomize(Iterable<Listing> listings) {

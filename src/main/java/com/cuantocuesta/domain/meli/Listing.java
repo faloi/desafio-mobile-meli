@@ -3,7 +3,6 @@ package com.cuantocuesta.domain.meli;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-
 import com.cuantocuesta.android.applicationModels.Displayable;
 import com.cuantocuesta.domain.NamedColor;
 import com.google.common.base.Function;
@@ -15,6 +14,7 @@ import com.google.common.collect.Ordering;
 import java.util.*;
 
 public class Listing implements Displayable {
+  public String categoryId;
   public String id;
   public String title;
   public java.lang.Double price;
@@ -31,6 +31,11 @@ public class Listing implements Displayable {
   public Listing(String id) {
     this();
     this.id = id;
+  }
+
+  public Listing(String id, String categoryId) {
+    this(id);
+    this.categoryId = categoryId;
   }
 
   public String getPermalink() {
@@ -144,5 +149,25 @@ public class Listing implements Displayable {
     callIntent(context, String.format("meli://item?id=%s", this.getId()));
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Listing listing = (Listing) o;
+
+    if (!id.equals(listing.id)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return id.hashCode();
+  }
+
+  public String getCategoryId() {
+    return categoryId;
+  }
 }
 
