@@ -12,7 +12,6 @@ import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.CategoryView;
 import com.cuantocuesta.domain.meli.Category;
 import com.cuantocuesta.domain.meli.ChildrenCategory;
-import com.cuantocuesta.domain.meli.Listing;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -62,17 +61,19 @@ public class CategoriesActivity extends ListSpiceActivity<Category.List, Meli, C
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(swipeDetector.swipeDetected()) {
+
           if(swipeDetector.getAction() == SwipeDetector.Action.RL) {
-            removeItem(((CategoryView)view).getCategory());
+//            removeItem(((CategoryView)view).getCategory());
+            items.remove(position);
+            listingsListView.getAdapter().notifyDataSetChanged();
           } else if(swipeDetector.getAction() == SwipeDetector.Action.LR){
             Category category = ((CategoryView) view).getCategory();
             selectedCategories.add(category);
-            removeItem(category);
+            items.remove(position);
+            listingsListView.getAdapter().notifyDataSetChanged();
           }
+          if(items.isEmpty()) goToNextWindow();
 
-          if(listingsListView.getChildCount() == 0){
-            goToNextWindow();
-          }
       }
     }});
 
@@ -81,12 +82,12 @@ public class CategoriesActivity extends ListSpiceActivity<Category.List, Meli, C
 
   @Override
   protected void updateListViewContent(List<Category> items) {
-    if(items.isEmpty()) goToNextWindow();
+    if(items.isEmpty()) return;
     super.updateListViewContent(items);
   }
 
   public void goToNextWindow(){
-//    ((LauncherActivity)this.getActivity()).
+    ((LauncherActivity)this.getActivity()).goToListingsSection(selectedCategories);
   }
 
   @Override

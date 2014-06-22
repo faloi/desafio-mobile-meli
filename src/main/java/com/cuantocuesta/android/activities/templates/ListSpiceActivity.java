@@ -14,21 +14,23 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
+import com.octo.android.robospice.spicelist.SpiceListView;
+
 import roboguice.util.temp.Ln;
 
 import java.util.List;
 
 public abstract class ListSpiceActivity<TResponse, TService, TModel extends Displayable> extends SpiceActivity {
-    protected RetrofitSpiceRequest<TResponse, TService> request;
-    protected ListView listingsListView;
-    protected View loadingView;
-    private List<TModel> items;
+  protected RetrofitSpiceRequest<TResponse, TService> request;
+  protected SpiceListView listingsListView;
+  protected View loadingView;
+  protected List<TModel> items;
 
-    @Override
-    public void onCreateFrame(Bundle savedInstanceState, View view) {
-        Ln.getConfig().setLoggingLevel(Log.ERROR);
-        listingsListView = (ListView) view.findViewById(R.id.listview_github);
-        loadingView = findViewById(R.id.loading_layout);
+  @Override
+  public void onCreateFrame(Bundle savedInstanceState, View view) {
+    Ln.getConfig().setLoggingLevel(Log.ERROR);
+    listingsListView = (SpiceListView) view.findViewById(R.id.listview_github);
+    loadingView = findViewById(R.id.loading_layout);
 
         request = new RetrofitSpiceRequest<TResponse, TService>(getResponseClass(), getServiceClass()) {
             @Override

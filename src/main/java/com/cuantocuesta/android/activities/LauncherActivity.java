@@ -15,6 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.templates.CustomFragment;
+import com.cuantocuesta.domain.meli.Category;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class LauncherActivity extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
@@ -130,35 +135,50 @@ public class LauncherActivity extends ActionBarActivity {
     private static final int CATEGORIES_SECTION = 0;
     private static final int LISTINGS_SECTION = 1;
     private static final int MY_CLOTHES_SECTION = 2;
+  public void goToListingsSection(Collection<Category> categories){
+    ListingsActivity listingsActivity = new ListingsActivity();
+    List<String> sCategories = new ArrayList<String>();
+    for(Category category : categories){
+      sCategories.add(category.getId());
+    }
+    listingsActivity.setCategories(sCategories);
+    fragment = listingsActivity;
+    goToFragment(LISTINGS_SECTION);
+  }
 
+  private void goToFragment(int position) {
+    // create a new fragment and specify the planet to show based on position
+    Bundle args = new Bundle();
+    args.putInt(MainContentFragment.ARG_OS, position);
+    fragment.setArguments(args);
+
+    fragmentManager.beginTransaction()
+      .replace(R.id.content_frame, fragment)
+      .commit();
+
+    // Highlight the selected item, update the title, and close the drawer
+    mDrawerList.setItemChecked(position, true);
+    mDrawerLayout.closeDrawer(mDrawerList);
+  }
+  
     private void selectItem(int position) {
 
-      switch (position) {
-            case CATEGORIES_SECTION:
-                fragment = new CategoriesActivity();
-                break;
-            case LISTINGS_SECTION:
-                fragment = new ListingsActivity();
-                break;
-            case MY_CLOTHES_SECTION:
-                fragment = new MyClothesFragment();
-                break;
-            default:
-                fragment = new ListingsActivity();
-        }
+      switch (position){
+        case CATEGORIES_SECTION:
+          fragment = new CategoriesActivity();
+          break;
+        case LISTINGS_SECTION:
+          fragment = new ListingsActivity();
+          break;
+        case MY_CLOTHES_SECTION:
+          fragment = new MyClothesFragment();
+          break;
+        default:
+          fragment = new ListingsActivity();
+      }
 
-        // create a new fragment and specify the planet to show based on position
-        Bundle args = new Bundle();
-        args.putInt(MainContentFragment.ARG_OS, position);
-        fragment.setArguments(args);
+      goToFragment(position);
 
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();
-
-        // Highlight the selected item, update the title, and close the drawer
-        mDrawerList.setItemChecked(position, true);
-        mDrawerLayout.closeDrawer(mDrawerList);
     }
 
     @Override

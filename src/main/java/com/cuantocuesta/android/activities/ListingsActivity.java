@@ -11,6 +11,7 @@ import com.cuantocuesta.android.views.LikeableView;
 import com.cuantocuesta.android.views.ListingView;
 import com.cuantocuesta.domain.ColorsProvider;
 import com.cuantocuesta.domain.ListingsStream;
+import com.cuantocuesta.domain.meli.Category;
 import com.cuantocuesta.domain.meli.Listing;
 import com.cuantocuesta.domain.meli.ResultContainer;
 import com.cuantocuesta.domain.observers.LikingLearningObserver;
@@ -20,13 +21,18 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class ListingsActivity extends MainContentFragment<ResultContainer, Meli, Listing> implements DisplayableQueue, LikingLearningObserver {
-    @Override
-    public void onCreateFrame(Bundle savedInstanceState, View view) {
-        super.onCreateFrame(savedInstanceState, view);
+
+  private List<String> categories = new ArrayList<String>();
+
+  @Override
+  public void onCreateFrame(Bundle savedInstanceState, View view) {
+    super.onCreateFrame(savedInstanceState, view);
 
         getStackableView().build(this);
         getStackableView().setOnShowDetail(new Function<ItemStackableView<Listing>, ItemStackableView<Listing>>() {
@@ -41,6 +47,10 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
 
     }
 
+  public void setCategories(List<String> categories) {
+    this.categories = categories;
+  }
+  
     private void loadAndShowDetails(final ItemStackableView<Listing> input) {
         final Listing listingWithoutVariations = input.getCurrent().getItem();
 
@@ -89,23 +99,22 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
         return result.getResults();
     }
 
-    @Override
-    protected SpiceListItemView<Listing> createView(Context context) {
-        return new ListingView(context, ListingsStream.getInstance(), this);
-    }
+  @Override
+  protected SpiceListItemView<Listing> createView(Context context) {
+    return new ListingView(context, ListingsStream.getInstance(), this);
+  }
 
-    protected ListingsStream createOrGetListingsStream(Meli service) {
-        if (ListingsStream.getInstance() == null) {
-            ListingsStream.create(
-                    service,
-                    getString(R.string.meli_site),
-                    Arrays.asList("MLA109085"),
-                    Arrays.<LikingLearningObserver>asList(this)
-            );
-        }
-
-        return ListingsStream.getInstance();
+  protected ListingsStream createOrGetListingsStream(Meli service) {
+    if (ListingsStream.getInstance() == null) {
+      ListingsStream.create(
+        service,
+        getString(R.string.meli_site),
+        categories,
+        Arrays.<LikingLearningObserver>asList(this)
+      );
     }
+    return ListingsStream.getInstance();
+  }
 
     public ListingsStream getListingsStream() {
         return ListingsStream.getInstance();
