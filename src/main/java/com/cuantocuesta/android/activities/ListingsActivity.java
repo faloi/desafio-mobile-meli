@@ -3,11 +3,9 @@ package com.cuantocuesta.android.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-
+import android.widget.Toast;
 import com.cuantocuesta.R;
-import com.cuantocuesta.android.activities.templates.ListSpiceActivity;
 import com.cuantocuesta.android.services.Meli;
-import com.cuantocuesta.android.views.ItemDetail;
 import com.cuantocuesta.android.views.ItemStackableView;
 import com.cuantocuesta.android.views.LikeableView;
 import com.cuantocuesta.android.views.ListingView;
@@ -15,6 +13,7 @@ import com.cuantocuesta.domain.ColorsProvider;
 import com.cuantocuesta.domain.ListingsStream;
 import com.cuantocuesta.domain.meli.Listing;
 import com.cuantocuesta.domain.meli.ResultContainer;
+import com.cuantocuesta.domain.observers.LikingLearningObserver;
 import com.google.common.base.Function;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -24,7 +23,7 @@ import com.octo.android.robospice.spicelist.SpiceListItemView;
 import java.util.Arrays;
 import java.util.List;
 
-public class ListingsActivity extends MainContentFragment<ResultContainer, Meli, Listing> implements DisplayableQueue {
+public class ListingsActivity extends MainContentFragment<ResultContainer, Meli, Listing> implements DisplayableQueue, LikingLearningObserver {
 
   protected ListingsStream listingsStream;
 
@@ -103,7 +102,8 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
       this.listingsStream = new ListingsStream(
         service,
         getString(R.string.meli_site),
-        Arrays.asList("MLA109276", "MLA109085", "MLA109282")
+        Arrays.asList("MLA109276", "MLA109085", "MLA109282"),
+        Arrays.<LikingLearningObserver>asList(this)
       );
     }
 
@@ -125,5 +125,10 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
   protected void updateListViewContent(List<Listing> items) {
     super.updateListViewContent(items);
     this.getStackableView().populateIfEmpty(this);
+  }
+
+  @Override
+  public void notifyListingsLikeThisWillBeExcluded(Listing listing) {
+    Toast.makeText(getActivity().getApplicationContext(), R.string.no_more_listings_like_this, Toast.LENGTH_SHORT).show();
   }
 }

@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">FashionUp</string>
-  <string name="textview_text">Buscando publicaciones de </string>
-  <string name="action_settings">Settings</string>
-  <string name="action_update">Update</string>
-  <string name="drawer_open">Open Drawer</string>
-  <string name="drawer_close">Close Drawer</string>
-  <string name="loading_please_wait">Cargando publicaciones...</string>
-  <string name="content_picture">Foto</string>
-  <string name="meli_base_clothing_category">MLA1430</string>
-  <string name="meli_site">MLA</string>
-  <string name="meli_clothing_category_example">MLA28114</string>
-  <string name="listing_dislike">No me gusta</string>
-  <string name="listing_like">Me gusta</string>
-  <string name="navigation_drawer_open">Abrir</string>
-  <string name="navigation_drawer_close">Cerrar</string>
-  <string name="talle">Talles %1$s</string>
-  <string-array name="menu_options">
-    <item>Género</item>
-    <item>Categorías</item>
-    <item>Productos</item>
-    <item>Comprar</item>
-  </string-array>
+    <string name="app_name">FashionUp</string>
+    <string name="textview_text">Buscando publicaciones de </string>
+    <string name="action_settings">Settings</string>
+    <string name="action_update">Update</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="loading_please_wait">Cargando publicaciones...</string>
+    <string name="content_picture">Foto</string>
+    <string name="meli_base_clothing_category">MLA1430</string>
+    <string name="meli_site">MLA</string>
+    <string name="meli_clothing_category_example">MLA28114</string>
+    <string name="listing_dislike">No me gusta</string>
+    <string name="listing_like">Me gusta</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string name="talle">Talles %1$s</string>
+    <string name="no_more_listings_like_this">Basado en tus preferencias, dejaremos de mostrarte publicaciones como esta</string>
+    <string-array name="menu_options">
+        <item>Género</item>
+        <item>Categorías</item>
+        <item>Productos</item>
+        <item>Comprar</item>
+    </string-array>
 </resources>
