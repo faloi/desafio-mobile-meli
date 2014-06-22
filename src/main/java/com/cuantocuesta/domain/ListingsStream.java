@@ -14,7 +14,7 @@ import java.util.*;
 
 public class ListingsStream {
   public static final int LIMIT = 10;
-  public static final int DISLIKE_FACTOR = 2;
+  public static final int DISLIKE_FACTOR = 5;
 
   private Meli service;
   private String site;
