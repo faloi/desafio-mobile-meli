@@ -51,6 +51,10 @@ public class ItemDetail extends RelativeLayout {
     Joiner joiner = Joiner.on(" ").skipNulls();
     talle.setText(getContext().getString(R.string.talle, joiner.join(listing.getItem().getSizes())));
 
+      findViewById(R.id.badge_free_shipping).setVisibility(listing.getItem().hasFreeShipping()? VISIBLE:GONE);
+
+      findViewById(R.id.badge_vendedor_oficial).setVisibility(listing.getItem().isFromOfficialStore()?VISIBLE:GONE);
+
     this.show();
   }
 

@@ -105,4 +105,32 @@
       android:src="@drawable/button_carrito" />
   </LinearLayout>
 
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:gravity="right">
+
+    <ImageView
+      android:id="@+id/badge_free_shipping"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:background="@drawable/circle_bg_white"
+      android:layout_marginRight="5dp"
+      android:padding="3dp"
+      android:src="@drawable/free_shipping"/>
+
+    <ImageView
+      android:id="@+id/badge_vendedor_oficial"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:background="@drawable/circle_bg_white"
+      android:layout_marginRight="5dp"
+      android:padding="3dp"
+      android:src="@drawable/vendedor_oficial"/>
+
+  </LinearLayout>
+
 </RelativeLayout>

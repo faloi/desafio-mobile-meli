@@ -68,7 +68,7 @@ public class Listing implements Displayable {
   }
 
   public boolean hasFreeShipping() {
-    return this.shipping.isFree();
+    return this.shipping != null && this.shipping.isFree();
   }
 
   public boolean isFromOfficialStore() {
