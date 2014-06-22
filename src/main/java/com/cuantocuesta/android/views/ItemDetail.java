@@ -16,8 +16,6 @@ import com.cuantocuesta.domain.meli.CombinatedColor;
 import com.cuantocuesta.domain.meli.Listing;
 import com.google.common.base.Joiner;
 
-import java.text.NumberFormat;
-
 public class ItemDetail extends RelativeLayout {
   private final ImageView listingImage;
   private final TextView price;
@@ -44,7 +42,7 @@ public class ItemDetail extends RelativeLayout {
     ImageView view = listing.getImageView();
     listingImage.setImageDrawable(view.getDrawable());
 
-    price.setText(NumberFormat.getCurrencyInstance().format(listing.getItem().getPrice()));
+    price.setText("$ " + listing.getItem().getPrice());
     this.updateColors(listing.getItem());
     this.setAnimation(AnimationUtils.loadAnimation(this.getContext(), R.anim.go_up));
 
@@ -53,7 +51,7 @@ public class ItemDetail extends RelativeLayout {
 
       findViewById(R.id.badge_free_shipping).setVisibility(listing.getItem().hasFreeShipping()? VISIBLE:GONE);
 
-      findViewById(R.id.badge_vendedor_oficial).setVisibility(listing.getItem().isFromOfficialStore()?VISIBLE:GONE);
+      findViewById(R.id.badge_vendedor_oficial).setVisibility(listing.getItem().isFromOfficialStore() ? VISIBLE : GONE);
 
     this.show();
   }
