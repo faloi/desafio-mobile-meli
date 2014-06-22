@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-
 import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.ListingsActivity;
 import com.google.common.base.Function;
@@ -44,7 +43,7 @@ public class ItemStackableView<T> extends RelativeLayout {
 
       @Override
       public void onClick(View v) {
-        dislike(listingsActivity);
+        like(listingsActivity);
       }
     });
 
@@ -52,7 +51,7 @@ public class ItemStackableView<T> extends RelativeLayout {
 
       @Override
       public void onClick(View v) {
-        like(listingsActivity);
+        dislike(listingsActivity);
       }
     });
 
