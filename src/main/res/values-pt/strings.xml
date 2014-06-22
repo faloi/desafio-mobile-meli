@@ -14,6 +14,7 @@
   <string name="talle">Tamanhos %1$s</string>
   <string name="no_more_listings_like_this">Com base em suas preferências, não vamos mostrar publicações como %1$s</string>
   <string name="no_more_listings_for_now">Não temos mais roupas para mostrar a você, volte e selecione outras categorias</string>
+  <string name="explicacion_categorias">Deslize uma categoria para a direita para adicioná-lo ao seu gosto, ou para a esquerda para indicar que você não gosta</string>
   <string-array name="menu_options">
     <item>Categorias</item>
     <item>Produtos</item>
