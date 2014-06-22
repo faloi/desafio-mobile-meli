@@ -13,64 +13,96 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
-    android:layout_above="@+id/color_selector_container"
+    android:layout_above="@+id/listing_detail_price_container"
     tools:src="@drawable/ejemplo" />
-
-  <LinearLayout
-    android:id="@+id/color_selector_container"
-    android:layout_above="@+id/listing_detail_price"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_margin="5dp">
-
-    <View
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_margin="5dp"
-      android:background="#fffbd41c" />
-
-    <View
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_margin="5dp"
-      android:background="#ff59f476" />
-  </LinearLayout>
 
   <com.cuantocuesta.android.NiceText
     android:id="@+id/listing_detail_price"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_above="@+id/listing_detail_talle"
-    tools:text="$0.00"
-    android:textSize="50sp" />
+    android:background="#A0000000"
+    android:gravity="center"
+    tools:text="$99,90"
+    android:textSize="50sp"
+    android:textColor="#ffffff"
+    android:layout_alignBottom="@id/listing_detail_main_image"/>
 
-  <com.cuantocuesta.android.NiceText
-    android:id="@+id/listing_detail_talle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
+  <LinearLayout
+    android:id="@+id/listing_detail_price_container"
     android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    tools:text="Talles S M X XL XXL"
-    android:textSize="20sp" />
-
-  <ImageView
-    android:id="@+id/listing_detail_button_back"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_toLeftOf="@id/listing_detail_talle"
-    android:layout_below="@id/color_selector_container"
-    android:padding="8dp"
-    android:src="@drawable/button_back"/>
+    android:orientation="horizontal">
 
-  <ImageView
-    android:id="@+id/listing_detail_button_carrito"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:layout_toRightOf="@id/listing_detail_talle"
-    android:layout_below="@id/color_selector_container"
-    android:src="@drawable/button_carrito"/>
+    <ImageView
+      android:id="@+id/listing_detail_button_back"
+      android:layout_width="0dp"
+      android:layout_height="130dp"
+      android:layout_weight="1"
+      android:padding="8dp"
+      android:src="@drawable/button_back" />
+
+    <RelativeLayout
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_gravity="bottom"
+      android:layout_weight="1"
+      >
+
+      <HorizontalScrollView
+        android:id="@+id/color_selector_container_scroller"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+          android:id="@+id/color_selector_container"
+
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+
+          android:layout_margin="5dp">
+
+          <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="#fffbd41c" />
+
+          <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="#fffbd41c" />
+
+          <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="#ff59f476" />
+        </LinearLayout>
+      </HorizontalScrollView>
+
+
+      <com.cuantocuesta.android.NiceText
+        android:id="@+id/listing_detail_talle"
+        android:layout_below="@+id/color_selector_container_scroller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="Talles S M X XL XXL"
+        android:textSize="20sp" />
+    </RelativeLayout>
+
+
+    <ImageView
+      android:id="@+id/listing_detail_button_carrito"
+      android:layout_width="0dp"
+      android:layout_height="130dp"
+      android:layout_weight="1"
+      android:padding="8dp"
+      android:src="@drawable/button_carrito" />
+  </LinearLayout>
+
 </RelativeLayout>
