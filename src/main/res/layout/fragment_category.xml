@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="@color/general_background_color"
+  android:orientation="vertical" >
+
+  <com.cuantocuesta.android.NiceText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="fill_horizontal"
+    android:padding="5dp"
+    android:textSize="17sp"
+    android:text="@string/explicacion_categorias"/>
+
+  <LinearLayout
+    android:id="@+id/loading_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <ProgressBar
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:indeterminate="true" />
+
+    <TextView
+      style="@android:style/TextAppearance.Large"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/loading_please_wait"
+      android:textColor="#222222"
+      android:textSize="20sp" />
+  </LinearLayout>
+
+  <com.octo.android.robospice.spicelist.SpiceListView
+    android:id="@+id/listview_github"
+    android:layout_width="fill_parent"
+    android:divider="#00000000"
+    android:layout_height="fill_parent"
+    android:visibility="gone" />
+
+</LinearLayout>

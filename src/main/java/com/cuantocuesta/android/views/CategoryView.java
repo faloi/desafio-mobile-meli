@@ -45,4 +45,8 @@ public class CategoryView extends RelativeLayout implements SpiceListItemView<Ca
     this.category = category;
     titleTextView.setText(category.getName());
   }
+
+  public Category getCategory() {
+    return category;
+  }
 }

@@ -12,18 +12,29 @@ import com.cuantocuesta.android.services.Meli;
 import com.cuantocuesta.android.views.CategoryView;
 import com.cuantocuesta.domain.meli.Category;
 import com.cuantocuesta.domain.meli.ChildrenCategory;
+import com.cuantocuesta.domain.meli.Listing;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
 public class CategoriesActivity extends ListSpiceActivity<Category.List, Meli, Category> {
+
+  private Collection<Category> selectedCategories = new ArrayList<Category>();
+
   @Override
   protected Class<Category.List> getResponseClass() {
     return Category.List.class;
+  }
+
+  @Override
+  protected int layoutId() {
+    return R.layout.fragment_category;
   }
 
   @Override
@@ -47,18 +58,35 @@ public class CategoriesActivity extends ListSpiceActivity<Category.List, Meli, C
     final SwipeDetector swipeDetector = new SwipeDetector();
     listingsListView.setOnTouchListener(swipeDetector);
     listingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(swipeDetector.swipeDetected()) {
           if(swipeDetector.getAction() == SwipeDetector.Action.RL) {
-            ((CategoryView)view).setVisibility(View.GONE);
+            removeItem(((CategoryView)view).getCategory());
           } else if(swipeDetector.getAction() == SwipeDetector.Action.LR){
-            ((CategoryView)view).setVisibility(View.GONE);
+            Category category = ((CategoryView) view).getCategory();
+            selectedCategories.add(category);
+            removeItem(category);
+          }
+
+          if(listingsListView.getChildCount() == 0){
+            goToNextWindow();
           }
       }
     }});
 
 
+  }
+
+  @Override
+  protected void updateListViewContent(List<Category> items) {
+    if(items.isEmpty()) goToNextWindow();
+    super.updateListViewContent(items);
+  }
+
+  public void goToNextWindow(){
+//    ((LauncherActivity)this.getActivity()).
   }
 
   @Override
