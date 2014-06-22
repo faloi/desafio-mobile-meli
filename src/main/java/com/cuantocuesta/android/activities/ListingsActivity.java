@@ -102,7 +102,7 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
       this.listingsStream = new ListingsStream(
         service,
         getString(R.string.meli_site),
-        Arrays.asList("MLA109276", "MLA109085", "MLA109282"),
+        Arrays.asList("MLA109085"),
         Arrays.<LikingLearningObserver>asList(this)
       );
     }
@@ -129,6 +129,10 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
 
   @Override
   public void notifyListingsLikeThisWillBeExcluded(Listing listing) {
-    Toast.makeText(getActivity().getApplicationContext(), R.string.no_more_listings_like_this, Toast.LENGTH_SHORT).show();
+    Toast.makeText(
+      getActivity().getApplicationContext(),
+      getString(R.string.no_more_listings_like_this, listing.getTitle().toLowerCase()),
+      Toast.LENGTH_SHORT
+    ).show();
   }
 }

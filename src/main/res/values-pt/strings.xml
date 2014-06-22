@@ -11,7 +11,7 @@
   <string name="meli_base_clothing_category">MLB1430</string>
   <string name="meli_site">MLB</string>
   <string name="meli_clothing_category_example">MLB28114</string>
-    <string name="no_more_listings_like_this">Com base em suas preferências, não vamos mostrar publicações como esta</string>
+    <string name="no_more_listings_like_this">Com base em suas preferências, não vamos mostrar publicações como %1$s</string>
     <string-array name="menu_options">
     <item>Home</item>
     <item>Categorias</item>
