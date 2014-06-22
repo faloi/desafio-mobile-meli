@@ -30,12 +30,12 @@ public class ItemStackableView<T> extends RelativeLayout {
     this.setOnTouchListener(new OnSwipeTouchListener(listingsActivity.getActivity()) {
       @Override
       public void onSwipeLeft() {
-        ItemStackableView.this.like(listingsActivity);
+        ItemStackableView.this.dislike(listingsActivity);
       }
 
       @Override
       public void onSwipeRight() {
-        ItemStackableView.this.dislike(listingsActivity);
+        ItemStackableView.this.like(listingsActivity);
       }
     });
 
@@ -110,7 +110,7 @@ public class ItemStackableView<T> extends RelativeLayout {
   }
 
   private enum Animacion {
-    ANIMATE_LEFT{
+    ANIMATE_RIGHT{
       public void animate(View view){
         if(view != null){
           TranslateAnimation animate = new TranslateAnimation(0,view.getWidth(),0,0);
@@ -118,7 +118,7 @@ public class ItemStackableView<T> extends RelativeLayout {
         }
       }
     },
-    ANIMATE_RIGHT{
+    ANIMATE_LEFT{
       public void animate(View view){
         if (view != null) {
           TranslateAnimation animate = new TranslateAnimation(0,-view.getWidth(),0,0);

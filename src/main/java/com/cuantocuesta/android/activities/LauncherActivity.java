@@ -116,7 +116,7 @@ public class LauncherActivity extends ActionBarActivity {
     super.onPostCreate(savedInstanceState);
     mDrawerToggle.syncState();
 
-    selectItem(GENERO_SECTION);
+    selectItem(CATEGORIES_SECTION);
   }
 
   @Override
@@ -129,16 +129,13 @@ public class LauncherActivity extends ActionBarActivity {
    * Swaps fragments in the main content view
    */
 
-  private static final int GENERO_SECTION = 0;
-  private static final int CATEGORIES_SECTION = 1;
-  private static final int LISTINGS_SECTION = 2;
+  private static final int CATEGORIES_SECTION = 0;
+  private static final int LISTINGS_SECTION = 1;
+  private static final int MIS_PRODUCTOS = 1;
 
   private void selectItem(int position) {
 
     switch (position){
-      case GENERO_SECTION:
-        fragment = new GeneroActivity();
-        break;
       case CATEGORIES_SECTION:
         fragment = new CategoriesActivity();
         break;

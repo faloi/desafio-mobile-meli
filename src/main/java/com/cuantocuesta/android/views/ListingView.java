@@ -22,7 +22,6 @@ import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 public class ListingView extends RelativeLayout implements SpiceListItemView<Listing> , LikeableView<Listing> {
   private TextView titleTextView;
-  private TextView priceTextView;
   private ImageView thumbImageView;
   private Listing listing;
   private ListingsStream listingsStream;
@@ -42,7 +41,6 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
   private void inflateView(final Context context) {
     LayoutInflater.from(context).inflate(R.layout.list_item, this);
     this.titleTextView = (TextView) this.findViewById(R.id.user_name_textview);
-    this.priceTextView = (TextView) this.findViewById(R.id.github_content_textview);
     this.thumbImageView = (ImageView) this.findViewById(R.id.octo_thumbnail_imageview);
 
 //    this.setOnClickListener(new OpenMeliListing(context));
@@ -99,7 +97,6 @@ public class ListingView extends RelativeLayout implements SpiceListItemView<Lis
   public void update(Listing listing) {
     this.listing = listing;
     titleTextView.setText(listing.getTitle());
-    priceTextView.setText(String.valueOf(listing.getPrice()));
   }
 
   private void removeMyself() {

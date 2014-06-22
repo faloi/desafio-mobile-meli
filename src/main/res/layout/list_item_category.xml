@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="fill_parent"
+  android:padding="2dp"
+  android:background="@drawable/background_with_shadow"
+  android:layout_margin="10dp"
+  android:layout_height="wrap_content">
+
+  <ImageView
+    android:id="@+id/octo_thumbnail_imageview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="centerInside"
+    android:layout_alignParentRight="true"
+    android:background="#ffffff"
+    tools:src="@drawable/ejemplo"
+    android:layout_alignParentTop="true"
+    android:contentDescription="@string/content_picture"/>
+
+  <com.cuantocuesta.android.NiceText
+    android:id="@+id/user_name_textview"
+    style="@android:style/TextAppearance.Medium"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/octo_thumbnail_imageview"
+    android:textSize="35sp"
+    android:background="#50ff0000"
+    android:textColor="#ffffff"
+    tools:text="Remera Sarlonga"
+    android:singleLine="true"
+    android:ellipsize="end"
+    android:layout_alignParentTop="true" />
+
+  <TextView
+    android:id="@+id/github_content_textview"
+    style="@android:style/TextAppearance.Small"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@id/user_name_textview"
+    android:layout_below="@id/user_name_textview"
+    android:textColor="#606060"
+    android:textSize="25sp"
+    tools:text="otro dato"/>
+
+  <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/listing_dislike"
+    android:id="@+id/dislike_button"
+    android:layout_below="@+id/octo_thumbnail_imageview"
+    android:layout_alignLeft="@+id/github_content_textview"
+    android:layout_alignStart="@+id/github_content_textview" />
+
+  <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/listing_like"
+    android:id="@+id/like_button"
+    android:layout_below="@+id/octo_thumbnail_imageview"
+    android:layout_toRightOf="@+id/github_content_textview"
+    android:layout_marginLeft="54dp" />
+
+</RelativeLayout>

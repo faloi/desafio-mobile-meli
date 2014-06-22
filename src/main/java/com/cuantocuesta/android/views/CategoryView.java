@@ -11,7 +11,6 @@ import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 public class CategoryView extends RelativeLayout implements SpiceListItemView<Category> {
   private TextView titleTextView;
-  private TextView priceTextView;
   private ImageView thumbImageView;
   private Category category;
 
@@ -21,9 +20,8 @@ public class CategoryView extends RelativeLayout implements SpiceListItemView<Ca
   }
 
   private void inflateView(Context context) {
-    LayoutInflater.from(context).inflate(R.layout.list_item, this);
+    LayoutInflater.from(context).inflate(R.layout.list_item_category, this);
     this.titleTextView = (TextView) this.findViewById(R.id.user_name_textview);
-    this.priceTextView = (TextView) this.findViewById(R.id.github_content_textview);
     this.thumbImageView = (ImageView) this.findViewById(R.id.octo_thumbnail_imageview);
   }
 
@@ -46,6 +44,5 @@ public class CategoryView extends RelativeLayout implements SpiceListItemView<Ca
   public void update(Category category) {
     this.category = category;
     titleTextView.setText(category.getName());
-    priceTextView.setText(String.valueOf(category.getId()));
   }
 }
