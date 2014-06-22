@@ -17,7 +17,8 @@
     <string name="navigation_drawer_close">Cerrar</string>
     <string name="talle">Talles %1$s</string>
     <string name="no_more_listings_like_this">Basado en tus preferencias, dejaremos de mostrarte publicaciones como %1$s</string>
-    <string-array name="menu_options">
+  <string name="no_more_listings_for_now">Por el momento no tenemos mas prendas para mostrarte, volve atrás y elegí otras categorías</string>
+  <string-array name="menu_options">
         <item>Categorías</item>
         <item>Productos</item>
         <item>Mis Prendas</item>
