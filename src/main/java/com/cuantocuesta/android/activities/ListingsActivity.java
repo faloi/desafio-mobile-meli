@@ -24,9 +24,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ListingsActivity extends MainContentFragment<ResultContainer, Meli, Listing> implements DisplayableQueue, LikingLearningObserver {
-
-  protected ListingsStream listingsStream;
-
   @Override
   public void onCreateFrame(Bundle savedInstanceState, View view) {
     super.onCreateFrame(savedInstanceState, view);
@@ -94,24 +91,24 @@ public class ListingsActivity extends MainContentFragment<ResultContainer, Meli,
 
   @Override
   protected SpiceListItemView<Listing> createView(Context context) {
-    return new ListingView(context, listingsStream, this);
+    return new ListingView(context, ListingsStream.getInstance(), this);
   }
 
   protected ListingsStream createOrGetListingsStream(Meli service) {
-    if (this.listingsStream == null) {
-      this.listingsStream = new ListingsStream(
+    if (ListingsStream.getInstance() == null) {
+      ListingsStream.create(
         service,
         getString(R.string.meli_site),
-        Arrays.asList("MLA109085"),
+        Arrays.asList("MLB23262"),
         Arrays.<LikingLearningObserver>asList(this)
       );
     }
 
-    return listingsStream;
+    return ListingsStream.getInstance();
   }
 
   public ListingsStream getListingsStream() {
-    return listingsStream;
+    return ListingsStream.getInstance();
   }
 
   public LikeableView<Listing> pop(){

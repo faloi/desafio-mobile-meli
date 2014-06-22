@@ -3,7 +3,6 @@ package com.cuantocuesta.android.activities;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.cuantocuesta.R;
 import com.cuantocuesta.android.activities.templates.CustomFragment;
 
@@ -131,7 +129,7 @@ public class LauncherActivity extends ActionBarActivity {
 
   private static final int CATEGORIES_SECTION = 0;
   private static final int LISTINGS_SECTION = 1;
-  private static final int MIS_PRODUCTOS = 1;
+  private static final int MY_CLOTHES_SECTION = 2;
 
   private void selectItem(int position) {
 
@@ -142,6 +140,8 @@ public class LauncherActivity extends ActionBarActivity {
       case LISTINGS_SECTION:
         fragment = new ListingsActivity();
         break;
+      case MY_CLOTHES_SECTION:
+        fragment = new MyClothesFragment();
       default:
         fragment = new ListingsActivity();
     }

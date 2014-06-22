@@ -13,8 +13,19 @@ import com.google.common.collect.Ordering;
 import java.util.*;
 
 public class ListingsStream {
-  public static final int LIMIT = 10;
+  public static final int LIMIT = 20;
   public static final int DISLIKE_FACTOR = 5;
+
+  public static ListingsStream getInstance() {
+    return instance;
+  }
+
+  public static ListingsStream create(Meli service, String site, List<String> relevantCategories, Iterable<LikingLearningObserver> observers) {
+    instance = new ListingsStream(service, site, relevantCategories, observers);
+    return getInstance();
+  }
+
+  private static ListingsStream instance;
 
   private Meli service;
   private String site;
@@ -134,5 +145,9 @@ public class ListingsStream {
 
   public Iterable<LikingLearningObserver> getObservers() {
     return observers;
+  }
+
+  public List<Listing> getLikedListings() {
+    return likedListings;
   }
 }

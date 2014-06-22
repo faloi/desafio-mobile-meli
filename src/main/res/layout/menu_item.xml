@@ -11,9 +11,9 @@
     android:id="@+id/menu_item_label"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:textSize="40sp"
+      android:textSize="35sp"
     android:gravity="center"
     android:textColor="#ffffff"
-    tools:text="Opcion 1"/>
+      tools:text="Minhas roupas" />
 
 </LinearLayout>
