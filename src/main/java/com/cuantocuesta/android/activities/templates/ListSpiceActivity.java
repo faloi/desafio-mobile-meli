@@ -100,7 +100,7 @@ public abstract class ListSpiceActivity<TResponse, TService, TModel extends Disp
     @Override
     public void onRequestFailure(SpiceException spiceException) {
       ListSpiceActivity.this.getActivity().setProgressBarIndeterminateVisibility(false);
-      Toast.makeText(ListSpiceActivity.this.getActivity(), "Ha ocurrido un error al cargar los datos", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ListSpiceActivity.this.getActivity(), getString(R.string.no_more_listings_for_now), Toast.LENGTH_SHORT).show();
     }
 
     @Override
