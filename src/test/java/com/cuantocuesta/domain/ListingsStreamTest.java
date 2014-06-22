@@ -96,6 +96,27 @@ public class ListingsStreamTest {
     assertEquals(Arrays.asList(calzasListing), stream.getMoreListings());
   }
 
+  @Test
+  public void Should_fetch_more_listings_if_all_the_originals_are_excluded() {
+    when(service.searchByCategory(eq("MLA"), eq("MLA1234"), 0, ListingsStream.LIMIT)).thenReturn(
+      new ResultContainer(Arrays.asList(new Listing("MLA1111", "shorts")))
+    );
+
+    when(service.searchByCategory(eq("MLA"), eq("MLA1234"), ListingsStream.LIMIT, ListingsStream.LIMIT)).thenReturn(
+      new ResultContainer(Arrays.asList(new Listing("MLA1111", "camisas")))
+    );
+
+    ListingsStream stream = createStream("MLA1234");
+
+    for (int i = 0; i <= ListingsStream.DISLIKE_FACTOR; i++)
+      stream.registerDislike(new Listing("MLA1111", "shorts"));
+
+    stream.getMoreListings();
+
+    verify(service).searchByCategory("MLA", "MLA1234", 0, ListingsStream.LIMIT);
+    verify(service).searchByCategory("MLA", "MLA1234", ListingsStream.LIMIT, ListingsStream.LIMIT);
+  }
+
   private void setupListingsResponse(String category, Listing... listings) {
     when(service.searchByCategory("MLA", category, 0, ListingsStream.LIMIT)).thenReturn(
       new ResultContainer(Arrays.asList(listings))

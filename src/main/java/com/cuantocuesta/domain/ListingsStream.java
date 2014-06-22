@@ -58,7 +58,10 @@ public class ListingsStream {
       }
     });
 
-    return randomize(fetchAdditionalData(listings));
+    if (listings.iterator().hasNext())
+      return randomize(fetchAdditionalData(listings));
+    else
+      return this.getMoreListings();
   }
 
   private boolean isCategoryDisliked(String categoryId) {
